@@ -16,7 +16,6 @@ set wildmode=list:longest       " complete files like a shell
 
 set clipboard=unnamed           " use the pasteboard as the default register
 set autochdir                   " working directory is always the same as the file being edited
-set undofile                    " create files containing undo info so that previous actions can be undone
 set hidden                      " don't raise a warning when navigating away from a hidden buffer with unsaved changes
 au FocusLost * :wa              " save file on losing focus
 
@@ -85,7 +84,6 @@ syntax enable
 " else
 set background=dark
 " endif
-colorscheme solarized
 
 "" Whitespace
 set tabstop=4                   " indentation every 4 cols
@@ -101,15 +99,19 @@ set listchars=tab:▸\ ,eol:¬
 set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital letter
+set smartcase                   " ... unless they contain at least one capital letter          
 
 " Use normal regex
 nnoremap / /\v
 vnoremap / /\v
 
 " Backup files
-set backupdir=~/.vim/tmp
-set undodir=~/.vim/tmp
+try
+    set backupdir=~/.vim/tmp
+    set undodir=~/.vim/tmp
+    set undofile                    " create files containing undo info so that previous actions can be undone
+catch
+endtry
 
 "" Plugin setup
 

@@ -29,3 +29,5 @@ Bundle 'ZoomWin'
 
 filetype plugin indent on       " load file type plugins + indentation
 
+colorscheme solarized
+
