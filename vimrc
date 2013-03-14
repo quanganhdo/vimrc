@@ -1,38 +1,15 @@
 "" Behaviors
 set nocompatible                " choose no compatibility with legacy vi
+filetype off
 
-" Pathogen
-" execute pathogen#infect()
-" silent! call pathogen#helptags()
-
-" Vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" Kick off Vundle
-Bundle 'gmarik/vundle'
-
-Bundle 'a.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'bufexplorer.zip'
-Bundle 'Gundo'
-Bundle 'matchit.zip'
-Bundle 'The-NERD-tree'
-Bundle 'snipMate'
-Bundle 'SuperTab'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'twe4ked/vim-peepopen'
-Bundle 'tpope/vim-repeat'
-Bundle 'airblade/vim-rooter'
-Bundle 'tpope/vim-surround'
-Bundle 'ZoomWin'
-
-set encoding=utf-8              " utf-8 as default encoding 
+" Vundle 
+if filereadable($HOME . "/.vundle.vim")
+    source $HOME/.vundle.vim
+endif
 
 filetype plugin indent on       " load file type plugins + indentation
+
+set encoding=utf-8              " utf-8 as default encoding 
 
 set wildmenu                    " better command autocompletion
 set wildmode=list:longest       " complete files like a shell
@@ -40,14 +17,18 @@ set wildmode=list:longest       " complete files like a shell
 set clipboard=unnamed           " use the pasteboard as the default register
 set autochdir                   " working directory is always the same as the file being edited
 set undofile                    " create files containing undo info so that previous actions can be undone
-set hidden                      " handle multiple buffers better
+set hidden                      " don't raise a warning when navigating away from a hidden buffer with unsaved changes
 au FocusLost * :wa              " save file on losing focus
 
 set mouse=a                     " enable mouse usage
 
 set visualbell                  " no beeping
 
+set virtualedit=all             " cursor can be positioned anywhere
+
 set history=1000
+
+set cpoptions+=$              " put a $ to the end when using 'cw' and similar commands instead of deleting and replacing it
 
 " Use , as <leader>
 let mapleader = ","
@@ -65,6 +46,25 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
+" Allow command line editing like emacs
+cnoremap <C-A>      <Home>
+cnoremap <C-B>      <Left>
+cnoremap <C-E>      <End>
+cnoremap <C-F>      <Right>
+cnoremap <C-N>      <End>
+cnoremap <C-P>      <Up>
+cnoremap <ESC>b     <S-Left>
+cnoremap <ESC><C-B> <S-Left>
+cnoremap <ESC>f     <S-Right>
+cnoremap <ESC><C-F> <S-Right>
+cnoremap <ESC><C-H> <C-W>
+
+" Move between windows quickly
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
 "" Display
 set showcmd                     " display incomplete commands
 set showmode                    " display current mode
@@ -72,6 +72,7 @@ set cursorline                  " highlight current line
 set ruler                       " display cursor position
 set laststatus=2                " always show statusline
 set showmatch                   " show matching parentheses
+set cmdheight=2                 " command line height
 
 "" Wrapping
 set wrap
@@ -82,7 +83,7 @@ syntax enable
 " if has('gui_running')
     " set background=light
 " else
-    set background=dark
+set background=dark
 " endif
 colorscheme solarized
 
@@ -109,6 +110,7 @@ vnoremap / /\v
 " Backup files
 set backupdir=~/.vim/tmp
 set undodir=~/.vim/tmp
+
 "" Plugin setup
 
 " Ack
