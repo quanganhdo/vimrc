@@ -14,7 +14,9 @@ set encoding=utf-8              " utf-8 as default encoding
 set wildmenu                    " better command autocompletion
 set wildmode=list:longest       " complete files like a shell
 
-set clipboard=unnamed           " use the pasteboard as the default register
+if $TMUX == ''
+    set clipboard+=unnamed           " use the pasteboard as the default register
+endif
 " set autochdir                   " working directory is always the same as the file being edited
 set hidden                      " don't raise a warning when navigating away from a hidden buffer with unsaved changes
 au FocusLost * :wa              " save file on losing focus
@@ -140,3 +142,11 @@ let NERDTreeShowBookmarks=1     " display bookmark table
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+
+" ctrlp
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_max_height = 30
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
+
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
