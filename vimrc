@@ -15,7 +15,7 @@ set wildmenu                    " better command autocompletion
 set wildmode=list:longest       " complete files like a shell
 
 set clipboard=unnamed           " use the pasteboard as the default register
-set autochdir                   " working directory is always the same as the file being edited
+" set autochdir                   " working directory is always the same as the file being edited
 set hidden                      " don't raise a warning when navigating away from a hidden buffer with unsaved changes
 au FocusLost * :wa              " save file on losing focus
 
@@ -27,13 +27,16 @@ set virtualedit=all             " cursor can be positioned anywhere
 
 set history=1000
 
-set cpoptions+=$              " put a $ to the end when using 'cw' and similar commands instead of deleting and replacing it
+set number
 
 " Use , as <leader>
 let mapleader = ","
 
 " Use jj as Esc
 inoremap jj <esc>
+
+" ; at EOL
+inoremap ; <C-o>A;
 
 " Disable arrow keys
 map <up> <nop>
