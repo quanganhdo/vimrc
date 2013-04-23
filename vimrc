@@ -187,13 +187,6 @@ nnoremap <leader><space> :noh<cr>
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
-" NERDTree
-map <F5> :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-let NERDTreeQuitOnOpen=1        " close NERDTree after opening a file
-let NERDTreeChDirMode=0         " never change CWD
-let NERDTreeShowBookmarks=1     " display bookmark table
-
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
