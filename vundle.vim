@@ -11,15 +11,11 @@ Bundle 'gmarik/vundle'
 
 Bundle 'a.vim'
 Bundle 'mileszs/ack.vim'
-Bundle 'bufexplorer.zip'
-Bundle 'Gundo'
 Bundle 'matchit.zip'
 Bundle 'The-NERD-tree'
 Bundle 'snipMate'
-Bundle 'SuperTab'
-Bundle 'taglist.vim'
-Bundle 'Townk/vim-autoclose'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
@@ -29,7 +25,14 @@ Bundle 'tpope/vim-surround'
 Bundle 'ZoomWin'
 Bundle 'kien/ctrlp.vim'
 Bundle 'sjl/vitality.vim'
+Bundle 'SuperTab'
+Bundle 'godlygeek/tabular'
+Bundle 'YankRing.vim'
+Bundle 'mhinz/vim-signify'
+Bundle 'sjl/gundo.vim'
+Bundle 'xolox/vim-easytags'
 
 filetype plugin indent on       " load file type plugins + indentation
 
+set t_Co=256
 colorscheme solarized

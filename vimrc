@@ -9,26 +9,16 @@ endif
 
 filetype plugin indent on       " load file type plugins + indentation
 
-set encoding=utf-8              " utf-8 as default encoding 
-
-set wildmenu                    " better command autocompletion
-set wildmode=list:longest       " complete files like a shell
-
-if $TMUX == ''
-    set clipboard+=unnamed           " use the pasteboard as the default register
-endif
-" set autochdir                   " working directory is always the same as the file being edited
-set hidden                      " don't raise a warning when navigating away from a hidden buffer with unsaved changes
-au FocusLost * :wa              " save file on losing focus
-
-set mouse=a                     " enable mouse usage
-
-set visualbell                  " no beeping
-
-set virtualedit=all             " cursor can be positioned anywhere
-
-set history=1000
-
+set encoding=utf-8        " utf-8 as default encoding
+set wildmenu              " better command autocompletion
+set wildmode=list:longest " complete files like a shell
+set clipboard+=unnamed    " use the pasteboard as the default register
+set hidden                " don't raise a warning when navigating away from a hidden buffer with unsaved changes
+set mouse=a               " enable mouse usage
+set visualbell            " no beeping
+set virtualedit=all       " cursor can be positioned anywhere
+set history=10000
+set autoindent
 set number
 
 " Use , as <leader>
@@ -39,6 +29,9 @@ inoremap jj <esc>
 
 " ; at EOL
 inoremap ; <C-o>A;
+
+" Switch between last 2 files
+nnoremap <leader><leader> <c-^>
 
 " Disable arrow keys
 map <up> <nop>
@@ -68,6 +61,8 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+set splitbelow
+set splitright         
 
 "" Display
 set showcmd                     " display incomplete commands
@@ -78,17 +73,34 @@ set laststatus=2                " always show statusline
 set showmatch                   " show matching parentheses
 set cmdheight=2                 " command line height
 
+"" Copy
+map <leader>y "*y
+
+"" Scroll down
+noremap <Space> <PageDown>
+
 "" Wrapping
 set wrap
 set linebreak 
 
 "" Scheme
 syntax enable
-" if has('gui_running')
-    " set background=light
-" else
 set background=dark
-" endif
+
+"" Statusline
+set statusline=[
+set statusline+=%F
+set statusline+=%{&modified?'*':''}
+set statusline+=]
+set statusline+=%{&readonly?'\ (read-only)\ ':'\ '}
+set statusline+=%{strlen(&ft)?&ft:'<none>'}\ \ 
+set statusline+=%{&ff}\ \ 
+set statusline+=%{strlen(&fenc)?&fenc:'none'}\ \ 
+set statusline+=%=
+set statusline+=col\ %c\ \ 
+set statusline+=line\ %l\ 
+set statusline+=of\ %L\ 
+set statusline+=[%p%%]
 
 "" Whitespace
 set tabstop=4                   " indentation every 4 cols
@@ -96,9 +108,11 @@ set shiftwidth=4                " indent of 4 spaces
 set softtabstop=4               " backspaces delete indentation
 set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
-set scrolloff=3                 " show 3 lines of context around the cursor
+set scrolloff=8                 " around the cursor
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
+
+"" Statusline
 
 "" Searching
 set hlsearch                    " highlight matches
@@ -106,31 +120,72 @@ set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter          
 
+"" Undo
+set undodir=$HOME/.vim/tmp
+set backupdir=$HOME/.vim/tmp
+set undofile
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo  
+
 " Use normal regex
 nnoremap / /\v
 vnoremap / /\v
 
 " Backup files
-try
-    set backupdir=~/.vim/tmp
-    set undodir=~/.vim/tmp
-    set undofile                    " create files containing undo info so that previous actions can be undone
-catch
-endtry
+set noswapfile
+
+"" AutoCmds
+au FocusLost * :wa              " save file on losing focus
+
+" Line number for active file only
+au WinEnter * :setlocal number
+au WinLeave * :setlocal nonumber
+
+" Jump to last cursor position 
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+autocmd Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
+
+" Tab to indent/autocomplete
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" Rename file
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>n :call RenameFile()<cr>
 
 "" Plugin setup
 
 " Ack
 nnoremap <leader>a :Ack
 
-" Remove highlighting
+" Clear the search buffer when hitting return
+function! MapCR()
+  nnoremap <cr> :nohlsearch<cr>
+endfunction
+call MapCR()
 nnoremap <leader><space> :noh<cr> 
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
-
-" Gundo
-nnoremap <F6> :GundoToggle<CR>
 
 " NERDTree
 map <F5> :NERDTreeToggle<CR>
@@ -144,9 +199,25 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
 " ctrlp
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_max_height = 30
+map <leader>f :CtrlP<CR>
+map <leader>ft :CtrlPBufTag<CR>
+map <leader>fb :CtrlPBuffer<CR>
+let g:ctrlp_max_height = 10
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+" YankRing
+let g:yankring_history_dir="$HOME/.vim/tmp"
+
+" vim-signify
+let g:signify_vcs_list                  = ['git', 'svn']
+let g:signify_sign_color_ctermfg_add    = 2
+let g:signify_sign_color_ctermfg_delete = 1
+let g:signify_sign_color_ctermfg_change = 3
+let g:signify_sign_color_ctermbg        = 0
+
+" Hack for Colorized
+highlight clear SignColumn
+
+" vim-easytags
+let g:easytags_file = '$HOME/.vim/tags'
