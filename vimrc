@@ -14,12 +14,18 @@ set wildmenu              " better command autocompletion
 set wildmode=list:longest " complete files like a shell
 set clipboard+=unnamed    " use the pasteboard as the default register
 set hidden                " don't raise a warning when navigating away from a hidden buffer with unsaved changes
-set mouse=a               " enable mouse usage
 set visualbell            " no beeping
 set virtualedit=all       " cursor can be positioned anywhere
 set history=10000
 set autoindent
 set number
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set timeout timeoutlen=1000 ttimeoutlen=100 " fix slight delay after pressing ESC then O
+
+" Mouse
+set ttyfast
+set mouse=a               " enable mouse usage
+set ttymouse=xterm2
 
 " Use , as <leader>
 let mapleader = ","
@@ -34,14 +40,14 @@ inoremap ; <C-o>A;
 nnoremap <leader><leader> <c-^>
 
 " Disable arrow keys
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
+" map <up> <nop>
+" map <down> <nop>
+" map <left> <nop>
+" map <right> <nop>
+" imap <up> <nop>
+" imap <down> <nop>
+" imap <left> <nop>
+" imap <right> <nop>
 
 " Allow command line editing like emacs
 cnoremap <C-A>      <Home>
@@ -106,7 +112,6 @@ set statusline+=[%p%%]
 set tabstop=4                   " indentation every 4 cols
 set shiftwidth=4                " indent of 4 spaces
 set softtabstop=4               " backspaces delete indentation
-set expandtab                   " use spaces, not tabs (optional)
 set backspace=indent,eol,start  " backspace through everything in insert mode
 set scrolloff=8                 " around the cursor
 " Use the same symbols as TextMate for tabstops and EOLs
@@ -195,9 +200,11 @@ let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 map <leader>f :CtrlP<CR>
 map <leader>ft :CtrlPBufTag<CR>
 map <leader>fb :CtrlPBuffer<CR>
+map <leader>fm :CtrlPMRU<CR>
 let g:ctrlp_max_height = 10
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " YankRing
 let g:yankring_history_dir="$HOME/.vim/tmp"
@@ -213,4 +220,5 @@ let g:signify_sign_color_ctermbg        = 0
 highlight clear SignColumn
 
 " vim-easytags
-let g:easytags_file = '$HOME/.vim/tags'
+let g:easytags_file = '$HOME/.vim/tmp/tags'
+let g:easytags_suppress_ctags_warning = 1
