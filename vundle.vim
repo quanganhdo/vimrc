@@ -28,8 +28,8 @@ Bundle 'SuperTab'
 Bundle 'godlygeek/tabular'
 Bundle 'YankRing.vim'
 Bundle 'mhinz/vim-signify'
+Bundle 'mhinz/vim-startify'
 Bundle 'sjl/gundo.vim'
-Bundle 'xolox/vim-easytags'
 
 filetype plugin indent on       " load file type plugins + indentation
 
