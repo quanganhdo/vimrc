@@ -153,17 +153,20 @@ autocmd BufReadPost *
     \ endif
 autocmd Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
 
+" Syntax highlighting
+autocmd BufRead,BufNewFile *.java set filetype=java
+
 " Tab to indent/autocomplete
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<tab>"
+"     else
+"         return "\<c-p>"
+"     endif
+" endfunction
+" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <s-tab> <c-n>
 
 " Rename file
 function! RenameFile()
@@ -182,19 +185,27 @@ map <leader>n :call RenameFile()<cr>
 " Ack
 nnoremap <leader>a :Ack
 
-" Clear the search buffer when hitting return
-function! MapCR()
-  nnoremap <cr> :nohlsearch<cr>
-endfunction
-call MapCR()
-nnoremap <leader><space> :noh<cr> 
-
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+
+" AutoComplPop
+let g:acp_ignorecaseOption = 1
+let g:acp_behaviorJavaEclimLength = 3
+function MeetsForJavaEclim(context)
+  return g:acp_behaviorJavaEclimLength >= 0 &&
+        \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
+endfunction
+let g:acp_behavior = {
+    \ 'java': [{
+      \ 'command': "\<c-x>\<c-u>",
+      \ 'completefunc' : 'eclim#java#complete#CodeComplete',
+      \ 'meets'        : 'MeetsForJavaEclim',
+    \ }]
+  \ }
 
 " ctrlp
 map <leader>f :CtrlP<CR>
@@ -218,7 +229,3 @@ let g:signify_sign_color_ctermbg        = 0
 
 " Hack for Colorized
 highlight clear SignColumn
-
-" vim-easytags
-let g:easytags_file = '$HOME/.vim/tmp/tags'
-let g:easytags_suppress_ctags_warning = 1
