@@ -43,6 +43,9 @@ inoremap ; <C-o>A;
 " Switch between last 2 files
 nnoremap <leader><leader> <c-^>
 
+" Remove highlighting
+nnoremap <leader><space> :noh<cr>
+
 " Allow command line editing like emacs
 cnoremap <C-A>      <Home>
 cnoremap <C-B>      <Left>
@@ -85,7 +88,10 @@ set linebreak
 
 "" Scheme
 syntax enable
-set background=dark
+set t_Co=256
+colorscheme grb256
+" colorscheme solarized
+" set background=dark
 
 "" Statusline
 set statusline=[
@@ -162,6 +168,10 @@ autocmd Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
 " Syntax highlighting
 autocmd BufRead,BufNewFile *.java set filetype=java
 
+" Open/View files in same directory
+cnoremap %% <C-R>=expand('%:h').'/'<CR>
+map <leader>e :edit %%
+
 " Rename file
 function! RenameFile()
     let old_name = expand('%')
@@ -186,38 +196,18 @@ nmap <leader>l :set list!<CR>
 let g:SuperTabDefaultCompletionType        = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
-" AutoComplPop
-let g:acp_ignorecaseOption        = 1
-let g:acp_behaviorJavaEclimLength = 3
-if !exists("*MeetsForJavaEclim")
-  function MeetsForJavaEclim(context)
-    return g:acp_behaviorJavaEclimLength >= 0 &&
-          \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
-  endfunction
-endif
-let g:acp_behavior = {
-    \ 'java': [{
-      \ 'command': "\<c-x>\<c-u>",
-      \ 'completefunc' : 'eclim#java#complete#CodeComplete',
-      \ 'meets'        : 'MeetsForJavaEclim',
-    \ }]
-  \ }
-
 " Tabular
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
-" ctrlp
-map <leader>f :CtrlP<CR>
-map <leader>ft :CtrlPBufTag<CR>
-map <leader>fb :CtrlPBuffer<CR>
-map <leader>fm :CtrlPMRU<CR>
-let g:ctrlp_max_height            = 10
-let g:ctrlp_working_path_mode     = 0
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_custom_ignore         = '\v[\/]\.(git|hg|svn)$'
+" CommandT
+map <leader>f :CommandTFlush<CR>\|:CommandT<CR>
+map <leader>ft :CommandTFlush<CR>\|:CommandTTag<CR>
+map <leader>fb :CommandTFlush<CR>\|:CommandTBuffer<CR>
+map <leader>fj :CommandTFlush<CR>\|:CommandTJump<CR>
+map <leader>ff :CommandTFlush<CR>
 
 " YankRing
 let g:yankring_history_dir="$HOME/.vim/tmp"
@@ -235,3 +225,7 @@ highlight clear SignColumn
 " Syntastic
 let g:syntastic_check_on_open = 1
 let g:syntastic_auto_loc_list = 1
+
+" Snipmate
+:imap <C-y> <Plug>snipMateNextOrTrigger
+:smap <C-y> <Plug>snipMateNextOrTrigger
