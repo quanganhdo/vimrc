@@ -9,6 +9,10 @@ endif
 
 filetype plugin indent on       " load file type plugins + indentation
 
+if $SHELL =~ 'bin/fish'
+	set shell=/bin/sh
+endif
+
 set encoding=utf-8        " utf-8 as default encoding
 set wildmenu              " better command autocompletion
 set wildmode=list:longest " complete files like a shell
@@ -38,16 +42,6 @@ inoremap ; <C-o>A;
 
 " Switch between last 2 files
 nnoremap <leader><leader> <c-^>
-
-" Disable arrow keys
-" map <up> <nop>
-" map <down> <nop>
-" map <left> <nop>
-" map <right> <nop>
-" imap <up> <nop>
-" imap <down> <nop>
-" imap <left> <nop>
-" imap <right> <nop>
 
 " Allow command line editing like emacs
 cnoremap <C-A>      <Home>
@@ -139,6 +133,18 @@ vnoremap / /\v
 " Backup files
 set noswapfile
 
+if !exists("*ReloadVimrc")
+	function ReloadVimrc()
+		let l = line(".")
+		let c = col(".")
+		source $MYVIMRC
+		call cursor(l, c)
+	endfunction
+endif
+
+autocmd! BufWritePost .vimrc :call ReloadVimrc()
+nmap <Leader>v :vsp $MYVIMRC<CR>
+
 "" AutoCmds
 au FocusLost * :wa              " save file on losing focus
 
@@ -155,18 +161,6 @@ autocmd Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
 
 " Syntax highlighting
 autocmd BufRead,BufNewFile *.java set filetype=java
-
-" Tab to indent/autocomplete
-" function! InsertTabWrapper()
-"     let col = col('.') - 1
-"     if !col || getline('.')[col - 1] !~ '\k'
-"         return "\<tab>"
-"     else
-"         return "\<c-p>"
-"     endif
-" endfunction
-" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-" inoremap <s-tab> <c-n>
 
 " Rename file
 function! RenameFile()
@@ -189,16 +183,18 @@ nnoremap <leader>a :Ack
 nmap <leader>l :set list!<CR>
 
 " Supertab
-let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType        = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
 " AutoComplPop
-let g:acp_ignorecaseOption = 1
+let g:acp_ignorecaseOption        = 1
 let g:acp_behaviorJavaEclimLength = 3
-function MeetsForJavaEclim(context)
-  return g:acp_behaviorJavaEclimLength >= 0 &&
-        \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
-endfunction
+if !exists("*MeetsForJavaEclim")
+  function MeetsForJavaEclim(context)
+    return g:acp_behaviorJavaEclimLength >= 0 &&
+          \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
+  endfunction
+endif
 let g:acp_behavior = {
     \ 'java': [{
       \ 'command': "\<c-x>\<c-u>",
@@ -207,15 +203,21 @@ let g:acp_behavior = {
     \ }]
   \ }
 
+" Tabular
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
 " ctrlp
 map <leader>f :CtrlP<CR>
 map <leader>ft :CtrlPBufTag<CR>
 map <leader>fb :CtrlPBuffer<CR>
 map <leader>fm :CtrlPMRU<CR>
-let g:ctrlp_max_height = 10
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_max_height            = 10
+let g:ctrlp_working_path_mode     = 0
 let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore         = '\v[\/]\.(git|hg|svn)$'
 
 " YankRing
 let g:yankring_history_dir="$HOME/.vim/tmp"
@@ -229,3 +231,7 @@ let g:signify_sign_color_ctermbg        = 0
 
 " Hack for Colorized
 highlight clear SignColumn
+
+" Syntastic
+let g:syntastic_check_on_open = 1
+let g:syntastic_auto_loc_list = 1

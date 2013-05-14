@@ -30,6 +30,9 @@ Bundle 'mhinz/vim-startify'
 Bundle 'sjl/gundo.vim'
 Bundle 'AutoComplPop'
 Bundle 'rdolgushin/snipMate-acp'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-rails'
+Bundle 'scrooloose/syntastic'
 
 filetype plugin indent on       " load file type plugins + indentation
 
