@@ -19,45 +19,30 @@ set wildmode=list:longest " complete files like a shell
 set clipboard+=unnamed    " use the pasteboard as the default register
 set hidden                " don't raise a warning when navigating away from a hidden buffer with unsaved changes
 set visualbell            " no beeping
-set virtualedit=all       " cursor can be positioned anywhere
+set virtualedit=block     " cursor can be positioned anywhere in Visual block mode
+set autoread              " automatically reload files changed outside of Vim
+set autowriteall          " write file contents when moving to another file
+set timeoutlen=1200       " more time for macros
+set ttimeoutlen=50        " faster Esc
+set fillchars+=vert:\ ,fold:-
 set history=10000
 set autoindent
-set number
+set relativenumber
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-set timeout timeoutlen=1000 ttimeoutlen=100 " fix slight delay after pressing ESC then O
 
 " Mouse
 set ttyfast
-set mouse=a               " enable mouse usage
+set mouse=nvi               " enable mouse usage in normal, visual, and insert mode
 set ttymouse=xterm2
 
 " Use , as <leader>
 let mapleader = ","
-
-" Use jj as Esc
-inoremap jj <esc>
-
-" ; at EOL
-inoremap ; <C-o>A;
 
 " Switch between last 2 files
 nnoremap <leader><leader> <c-^>
 
 " Remove highlighting
 nnoremap <leader><space> :noh<cr>
-
-" Allow command line editing like emacs
-cnoremap <C-A>      <Home>
-cnoremap <C-B>      <Left>
-cnoremap <C-E>      <End>
-cnoremap <C-F>      <Right>
-cnoremap <C-N>      <End>
-cnoremap <C-P>      <Up>
-cnoremap <ESC>b     <S-Left>
-cnoremap <ESC><C-B> <S-Left>
-cnoremap <ESC>f     <S-Right>
-cnoremap <ESC><C-F> <S-Right>
-cnoremap <ESC><C-H> <C-W>
 
 " Move between windows quickly
 map <C-h> <C-w>h
@@ -78,42 +63,52 @@ set cmdheight=2                 " command line height
 
 "" Copy
 map <leader>y "*y
-
-"" Scroll down
-noremap <Space> <PageDown>
+set pastetoggle=<F2>
 
 "" Wrapping
 set wrap
-set linebreak 
 
 "" Scheme
 syntax enable
 set t_Co=256
-colorscheme grb256
+
+" Tomorrow-Night
+colorscheme Tomorrow-Night
+highlight Search cterm=underline ctermfg=none ctermbg=none
+
+" GRB256
+" colorscheme grb256
+
+" Solarized 
 " colorscheme solarized
+" highlight clear SignColumn
 " set background=dark
 
 "" Statusline
-set statusline=[
+set statusline=[%n]\ 
+set statusline+=%{&paste?'*paste*\ ':''}
+set statusline+=[
 set statusline+=%F
 set statusline+=%{&modified?'*':''}
 set statusline+=]
-set statusline+=%{&readonly?'\ (read-only)\ ':'\ '}
+set statusline+=%{&readonly?'\ (read-only)\ ':'\ '}\ 
 set statusline+=%{strlen(&ft)?&ft:'<none>'}\ \ 
-set statusline+=%{&ff}\ \ 
+set statusline+=%{&ff}/
 set statusline+=%{strlen(&fenc)?&fenc:'none'}\ \ 
 set statusline+=%=
-set statusline+=col\ %c\ \ 
-set statusline+=line\ %l\ 
-set statusline+=of\ %L\ 
+set statusline+=%{tagbar#currenttag('[%s]','')}\ \ 
+set statusline+=%{fugitive#statusline()}\ \ 
+set statusline+=\ %l,%c
+set statusline+=/%L\ 
 set statusline+=[%p%%]
 
 "" Whitespace
-set tabstop=4                   " indentation every 4 cols
-set shiftwidth=4                " indent of 4 spaces
-set softtabstop=4               " backspaces delete indentation
-set backspace=indent,eol,start  " backspace through everything in insert mode
-set scrolloff=8                 " around the cursor
+set tabstop=4                  " indentation every 4 cols
+set shiftwidth=4               " indent of 4 spaces
+set softtabstop=4              " backspaces delete indentation
+set shiftround                 " round indent to multiple of shiftwidth
+set backspace=indent,eol,start " backspace through everything in insert mode
+set scrolloff=8                " around the cursor
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
@@ -148,15 +143,30 @@ if !exists("*ReloadVimrc")
 	endfunction
 endif
 
+" Always open help in vertical split
+augroup helpfiles
+  au!
+  au BufRead,BufEnter */doc/* wincmd L
+augroup END
+
+" Open .vimrc for quick editing
 autocmd! BufWritePost .vimrc :call ReloadVimrc()
+autocmd! BufWritePost .vundle.vim :call ReloadVimrc()
 nmap <Leader>v :vsp $MYVIMRC<CR>
+nmap <Leader>b :vsp $HOME/.vundle.vim<CR>
 
 "" AutoCmds
 au FocusLost * :wa              " save file on losing focus
 
-" Line number for active file only
-au WinEnter * :setlocal number
-au WinLeave * :setlocal nonumber
+" Relative number for current window only
+if !exists("*TurnOffNumber")
+    function TurnOffNumber()
+        set number
+        set nonumber
+    endfunction
+endif
+au WinEnter * set relativenumber
+au WinLeave * :call TurnOffNumber()
 
 " Jump to last cursor position 
 autocmd BufReadPost *
@@ -172,17 +182,10 @@ autocmd BufRead,BufNewFile *.java set filetype=java
 cnoremap %% <C-R>=expand('%:h').'/'<CR>
 map <leader>e :edit %%
 
-" Rename file
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-map <leader>n :call RenameFile()<cr>
+" Indent/Unident
+vnoremap > >gv
+vnoremap < <gv
+nmap <Leader>= gg=G
 
 "" Plugin setup
 
@@ -197,6 +200,8 @@ let g:SuperTabDefaultCompletionType        = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
 " Tabular
+nmap <Leader>a" :Tabularize /"<CR>
+vmap <Leader>a" :Tabularize /"<CR>
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
@@ -209,6 +214,11 @@ map <leader>fb :CommandTFlush<CR>\|:CommandTBuffer<CR>
 map <leader>fj :CommandTFlush<CR>\|:CommandTJump<CR>
 map <leader>ff :CommandTFlush<CR>
 
+" TagBar
+map <leader>t :TagbarToggle<CR>
+map <leader>ts :TagbarOpen<CR>\|:TagbarShowTag<CR>
+let g:tagbar_autoshowtag = 1
+
 " YankRing
 let g:yankring_history_dir="$HOME/.vim/tmp"
 
@@ -219,12 +229,12 @@ let g:signify_sign_color_ctermfg_delete = 1
 let g:signify_sign_color_ctermfg_change = 3
 let g:signify_sign_color_ctermbg        = 0
 
-" Hack for Colorized
-highlight clear SignColumn
-
 " Syntastic
 let g:syntastic_check_on_open = 1
-let g:syntastic_auto_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+
+" Rooter
+let g:rooter_manual_only = 1
 
 " Snipmate
 :imap <C-y> <Plug>snipMateNextOrTrigger

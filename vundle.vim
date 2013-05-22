@@ -18,17 +18,34 @@ Bundle 'mileszs/ack.vim'
 " Theme
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'quanganhdo/grb256'
+Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 " Auto close pairs
 Bundle 'Raimondi/delimitMate'
 
-" Essentials
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-repeat'
-Bundle 'airblade/vim-rooter'
-Bundle 'tpope/vim-surround'
+" Code commentary
+Bundle 'tpope/vim-commentary' 
+
+" End structures automatically
+Bundle 'tpope/vim-endwise'    
+
+" Git
+Bundle 'tpope/vim-fugitive'   
+
+" Dot commands for plugin maps
+Bundle 'tpope/vim-repeat'     
+
+" Unix shell commands
+Bundle 'tpope/vim-eunuch'     
+
+" Readline key bindings
+Bundle 'tpope/vim-rsi'        
+
+" Quoting/parenthesizing
+Bundle 'tpope/vim-surround'   
+
+" Change vim dir to project root
+Bundle 'airblade/vim-rooter'  
 
 " Text objects
 Bundle 'matchit.zip'
@@ -40,6 +57,7 @@ Bundle 'ZoomWin'
 
 " Tmux fixes
 Bundle 'sjl/vitality.vim'
+Bundle 'tpope/vim-tbone'
 
 " Indent code
 Bundle 'godlygeek/tabular'
@@ -50,15 +68,17 @@ Bundle 'YankRing.vim'
 " SVN/Git changes on signs bar
 Bundle 'mhinz/vim-signify'
 
-" Start page
-Bundle 'mhinz/vim-startify'
-
 " Undo tree
 Bundle 'sjl/gundo.vim'
 
 " Ruby/Rails stuff
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-rake'
+Bundle 'tpope/vim-bundler'
+
+" C stuff
+Bundle 'majutsushi/tagbar'
 
 " Syntax checking
 Bundle 'scrooloose/syntastic'
