@@ -38,6 +38,9 @@ set ttymouse=xterm2
 " Use , as <leader>
 let mapleader = ","
 
+" Dot selection
+vnoremap . :norm.<cr>
+
 " Switch between last 2 files
 nnoremap <leader><leader> <c-^>
 
@@ -174,6 +177,15 @@ autocmd BufReadPost *
     \   exe "normal g`\"" |
     \ endif
 autocmd Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
+
+" Autocompletion
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
 
 " Syntax highlighting
 autocmd BufRead,BufNewFile *.java set filetype=java

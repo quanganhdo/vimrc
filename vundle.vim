@@ -18,7 +18,7 @@ Bundle 'mileszs/ack.vim'
 " Theme
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'quanganhdo/grb256'
-Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
 
 " Auto close pairs
 Bundle 'Raimondi/delimitMate'
@@ -87,12 +87,11 @@ Bundle 'scrooloose/syntastic'
 " Needs system ruby 
 Bundle 'wincent/Command-T'
 
-" Auto completion
-" Needs libclang and whatnot
-Bundle 'Valloric/YouCompleteMe'
-
 " Snipmate
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
 Bundle 'garbas/vim-snipmate'
+
+" WriteRoom inspired
+Bundle 'mikewest/vimroom'
