@@ -249,6 +249,9 @@ function! s:my_cr_function()
 	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
 
 let g:rooter_manual_only = 2
 
@@ -281,3 +284,5 @@ if has('conceal')
 endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'auto_export': 1, 'syntax': 'markdown', 'ext': '.md'}]

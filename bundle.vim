@@ -102,4 +102,7 @@ NeoBundle 'scrooloose/syntastic'
 " WriteRoom inspired
 NeoBundle 'mikewest/vimroom'
 
+" Wiki
+NeoBundle 'vimwiki/vimwiki'
+
 NeoBundleCheck
