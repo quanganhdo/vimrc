@@ -229,7 +229,7 @@ let g:unite_split_rule = 'botright'
 let g:unite_source_history_yank_enable = 2
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <Leader>f :<C-u>Unite -default-action=vsplit file_rec/async:!<CR>
+nnoremap <Leader>f :<C-u>Unite -start-insert -default-action=vsplit file_rec/async:!<CR>
 nnoremap <Leader>ff :<C-u>Unite file<CR>
 nnoremap <Leader>fb :<C-u>Unite buffer<CR>
 nnoremap <Leader>ft :<C-u>Unite tag<CR>
