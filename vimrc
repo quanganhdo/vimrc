@@ -1,4 +1,4 @@
-" Behaviors
+"" Bhaviors
 set nocompatible                " choose no compatibility with legacy vi
 filetype off
 
@@ -166,6 +166,9 @@ autocmd! BufWritePost .vimrc :call ReloadVimrc()
 autocmd! BufWritePost .bundle.vim :call ReloadVimrc()
 nmap <Leader>v :call OpenInSplitIfNecessary($MYVIMRC)<CR>
 nmap <Leader>b :call OpenInSplitIfNecessary("~/.bundle.vim")<CR>
+
+" Reload file
+nmap <Leader>r :e<CR>
 
 "" AutoCmds
 au FocusLost * :wa              " save file on losing focus
