@@ -4,7 +4,7 @@ filetype off
 
 " Neobundle
 if filereadable($HOME . "/.bundle.vim")
-    source $HOME/.bundle.vim
+	source $HOME/.bundle.vim
 endif
 
 filetype plugin indent on       " load file type plugins + indentation
@@ -152,8 +152,8 @@ endif
 
 " Always open help in vertical split
 augroup helpfiles
-  au!
-  au BufRead,BufEnter */doc/* wincmd L
+	au!
+	au BufRead,BufEnter */doc/* wincmd L
 augroup END
 
 " Open .vimrc for quick editing
@@ -179,19 +179,19 @@ au FocusLost * :wa              " save file on losing focus
 
 " Relative number for current window only
 if !exists("*TurnOffNumber")
-    function TurnOffNumber()
-        set number
-        set nonumber
-    endfunction
+	function TurnOffNumber()
+		set number
+		set nonumber
+	endfunction
 endif
 au WinEnter * set relativenumber
 au WinLeave * :call TurnOffNumber()
 
 " Jump to last cursor position 
 autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+			\ if line("'\"") > 0 && line("'\"") <= line("$") |
+			\   exe "normal g`\"" |
+			\ endif
 
 " Misc spacings
 autocmd Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
@@ -199,7 +199,7 @@ autocmd Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
 " Autocompletion
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
@@ -237,8 +237,18 @@ nnoremap <Leader>fo :<C-u>Unite outline<CR>
 nnoremap <Leader>a :<C-u>Unite grep:.<CR>
 nnoremap <Leader>yr :<C-u>Unite history/yank<CR>
 
-let g:SuperTabDefaultCompletionType        = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+if !exists('g:neocomplete#keyword_patterns')
+	let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 let g:rooter_manual_only = 2
 
@@ -255,7 +265,19 @@ map <leader>t :TagbarToggle<CR>
 map <leader>ts :TagbarOpen<CR>\|:TagbarShowTag<CR>
 let g:tagbar_autoshowtag = 2
 
-let g:syntastic_check_on_open = 2
+let g:syntastic_check_on_open = 3
 
-:imap <C-y> <Plug>snipMateNextOrTrigger
-:smap <C-y> <Plug>snipMateNextOrTrigger
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'

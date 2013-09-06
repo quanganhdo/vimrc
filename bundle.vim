@@ -19,11 +19,17 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'h1mesuke/unite-outline'
 
+" Neocomplete (if_lua support)
+NeoBundle 'Shougo/neocomplete.vim'
+
+" Snippets
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'honza/vim-snippets'
+NeoBundle 'Shougo/neosnippet.vim'
+
 " Alternate file
 NeoBundle 'a.vim'
-
-" SuperTab
-NeoBundle 'ervandew/supertab'
 
 " Theme
 NeoBundle 'altercation/vim-colors-solarized'
@@ -92,12 +98,6 @@ NeoBundle 'majutsushi/tagbar'
 
 " Syntax checking
 NeoBundle 'scrooloose/syntastic'
-
-" Snipmate
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'garbas/vim-snipmate'
 
 " WriteRoom inspired
 NeoBundle 'mikewest/vimroom'
