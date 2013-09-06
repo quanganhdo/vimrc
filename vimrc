@@ -185,6 +185,8 @@ autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
+
+" Misc spacings
 autocmd Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
 
 " Autocompletion
@@ -210,52 +212,5 @@ nmap <Leader>= gg=G
 
 "" Plugin setup
 
-" Ack
-nnoremap <leader>a :Ack
-
-" Shortcut to rapidly toggle `set list`
+" Toggle listchars
 nmap <leader>l :set list!<CR>
-
-" Supertab
-let g:SuperTabDefaultCompletionType        = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-
-" Tabular
-nmap <Leader>a" :Tabularize /"<CR>
-vmap <Leader>a" :Tabularize /"<CR>
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-
-" CommandT
-map <leader>f :CommandTFlush<CR>\|:CommandT<CR>
-map <leader>ft :CommandTFlush<CR>\|:CommandTTag<CR>
-map <leader>fb :CommandTFlush<CR>\|:CommandTBuffer<CR>
-map <leader>fj :CommandTFlush<CR>\|:CommandTJump<CR>
-map <leader>ff :CommandTFlush<CR>
-
-" TagBar
-map <leader>t :TagbarToggle<CR>
-map <leader>ts :TagbarOpen<CR>\|:TagbarShowTag<CR>
-let g:tagbar_autoshowtag = 1
-
-" YankRing
-let g:yankring_history_dir="$HOME/.vim/tmp"
-
-" vim-signify
-let g:signify_vcs_list                  = ['git', 'svn']
-highlight SignifySignAdd cterm=bold ctermbg=none ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=none ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=none ctermfg=227
-
-" Syntastic
-let g:syntastic_check_on_open = 1
-" let g:syntastic_auto_loc_list = 1
-
-" Rooter
-let g:rooter_manual_only = 1
-
-" Snipmate
-:imap <C-y> <Plug>snipMateNextOrTrigger
-:smap <C-y> <Plug>snipMateNextOrTrigger
