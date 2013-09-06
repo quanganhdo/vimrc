@@ -1,10 +1,10 @@
-"" Behaviors
+" Behaviors
 set nocompatible                " choose no compatibility with legacy vi
 filetype off
 
-" Vundle 
-if filereadable($HOME . "/.vundle.vim")
-    source $HOME/.vundle.vim
+" Neobundle
+if filereadable($HOME . "/.bundle.vim")
+    source $HOME/.bundle.vim
 endif
 
 filetype plugin indent on       " load file type plugins + indentation
@@ -75,7 +75,7 @@ set wrap
 syntax enable
 set t_Co=256
 
-" Tomorrow-Night
+" Tomorrow-Night w/ search term underlining
 colorscheme Tomorrow-Night
 highlight Search cterm=underline ctermfg=none ctermbg=none
 
@@ -153,10 +153,19 @@ augroup helpfiles
 augroup END
 
 " Open .vimrc for quick editing
+if !exists('*OpenInSplitIfNecessary')
+	function OpenInSplitIfNecessary(file)
+		if line('$') == 1 && getline(1) == ''
+			exec 'e' a:file
+		else
+			exec 'vsp' a:file
+		endif
+	endfunction
+endif
 autocmd! BufWritePost .vimrc :call ReloadVimrc()
-autocmd! BufWritePost .vundle.vim :call ReloadVimrc()
-nmap <Leader>v :vsp $MYVIMRC<CR>
-nmap <Leader>b :vsp $HOME/.vundle.vim<CR>
+autocmd! BufWritePost .bundle.vim :call ReloadVimrc()
+nmap <Leader>v :call OpenInSplitIfNecessary($MYVIMRC)<CR>
+nmap <Leader>b :call OpenInSplitIfNecessary("~/.bundle.vim")<CR>
 
 "" AutoCmds
 au FocusLost * :wa              " save file on losing focus
@@ -236,10 +245,9 @@ let g:yankring_history_dir="$HOME/.vim/tmp"
 
 " vim-signify
 let g:signify_vcs_list                  = ['git', 'svn']
-let g:signify_sign_color_ctermfg_add    = 2
-let g:signify_sign_color_ctermfg_delete = 1
-let g:signify_sign_color_ctermfg_change = 3
-let g:signify_sign_color_ctermbg        = 0
+highlight SignifySignAdd cterm=bold ctermbg=none ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=none ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=none ctermfg=227
 
 " Syntastic
 let g:syntastic_check_on_open = 1
