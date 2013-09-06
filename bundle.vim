@@ -39,6 +39,9 @@ NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
 " Auto close pairs
 NeoBundle 'Raimondi/delimitMate'
 
+" Sensible
+NeoBundle 'tpope/vim-sensible'
+
 " Code commentary
 NeoBundle 'tpope/vim-commentary' 
 

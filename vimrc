@@ -7,26 +7,18 @@ if filereadable($HOME . "/.bundle.vim")
 	source $HOME/.bundle.vim
 endif
 
-filetype plugin indent on       " load file type plugins + indentation
+" Sensible
+runtime! plugin/sensible.vim
 
-if $SHELL =~ 'bin/fish'
-	set shell=/bin/sh
-endif
-
-set encoding=utf-8        " utf-8 as default encoding
-set wildmenu              " better command autocompletion
 set wildmode=list:longest " complete files like a shell
 set clipboard+=unnamed    " use the pasteboard as the default register
 set hidden                " don't raise a warning when navigating away from a hidden buffer with unsaved changes
 set visualbell            " no beeping
 set virtualedit=block     " cursor can be positioned anywhere in Visual block mode
-set autoread              " automatically reload files changed outside of Vim
 set autowriteall          " write file contents when moving to another file
 set timeoutlen=1200       " more time for macros
-set ttimeoutlen=50        " faster Esc
 set fillchars+=vert:\ ,fold:-
 set history=10000
-set autoindent
 set relativenumber
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
@@ -56,12 +48,8 @@ set splitbelow
 set splitright         
 
 "" Display
-set showcmd                     " display incomplete commands
 set showmode                    " display current mode
 set cursorline                  " highlight current line
-set ruler                       " display cursor position
-set laststatus=2                " always show statusline
-set showmatch                   " show matching parentheses
 set cmdheight=2                 " command line height
 
 "" Copy
@@ -72,7 +60,6 @@ set pastetoggle=<F2>
 set wrap
 
 "" Scheme
-syntax enable
 set t_Co=256
 
 " Tomorrow-Night w/ search term underlining
@@ -113,8 +100,6 @@ set statusline+=[%p%%]
 set tabstop=4                  " indentation every 4 cols
 set shiftwidth=4               " indent of 4 spaces
 set softtabstop=4              " backspaces delete indentation
-set shiftround                 " round indent to multiple of shiftwidth
-set backspace=indent,eol,start " backspace through everything in insert mode
 set scrolloff=8                " around the cursor
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
@@ -123,7 +108,6 @@ set listchars=tab:▸\ ,eol:¬
 
 "" Searching
 set hlsearch                    " highlight matches
-set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter          
 
@@ -229,15 +213,15 @@ let g:unite_split_rule = 'botright'
 let g:unite_source_history_yank_enable = 2
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <Leader>f :<C-u>Unite -start-insert -default-action=vsplit file_rec/async:!<CR>
-nnoremap <Leader>ff :<C-u>Unite file<CR>
-nnoremap <Leader>fb :<C-u>Unite buffer<CR>
-nnoremap <Leader>ft :<C-u>Unite tag<CR>
-nnoremap <Leader>fo :<C-u>Unite outline<CR>
+nnoremap <Leader>f :<C-u>Unite -auto-preview -start-insert -default-action=vsplit file_rec/async:!<CR>
+nnoremap <Leader>ff :<C-u>Unite -auto-preview file<CR>
+nnoremap <Leader>fb :<C-u>Unite -auto-preview buffer<CR>
+nnoremap <Leader>ft :<C-u>Unite -auto-preview tag<CR>
+nnoremap <Leader>fo :<C-u>Unite -auto-preview outline<CR>
 nnoremap <Leader>a :<C-u>Unite grep:.<CR>
 nnoremap <Leader>yr :<C-u>Unite history/yank<CR>
 
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 3
 let g:neocomplete#sources#syntax#min_keyword_length = 2
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 if !exists('g:neocomplete#keyword_patterns')
