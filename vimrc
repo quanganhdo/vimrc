@@ -1,4 +1,4 @@
-"" Bhaviors
+"" Behaviors
 set nocompatible                " choose no compatibility with legacy vi
 filetype off
 
@@ -115,7 +115,7 @@ set smartcase                   " ... unless they contain at least one capital l
 set undodir=$HOME/.vim/tmp
 set backupdir=$HOME/.vim/tmp
 set undofile
-set undolevels=1000         " How many undos
+set undolevels=1000         " number of undos 
 set undoreload=10000        " number of lines to save for undo  
 
 " Use normal regex

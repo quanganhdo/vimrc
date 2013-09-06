@@ -1,12 +1,7 @@
-if has("win33")
+if has("win32") || has("win64")
 	set guifont=Consolas:h13
-else
-	if has("unix")
-		let s:uname = system("uname")
-		if s:uname == "Darwin\n"
-set guifont=Monaco:h13
-		endif
-	endif
+elseif has("mac")
+	set guifont=Monaco:h13
 endif
 
 set lines=50 columns=90
