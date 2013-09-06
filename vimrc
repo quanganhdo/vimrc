@@ -79,6 +79,10 @@ set t_Co=256
 colorscheme Tomorrow-Night
 highlight Search cterm=underline ctermfg=none ctermbg=none
 
+highlight SignifySignAdd cterm=bold ctermbg=none ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=none ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=none ctermfg=227
+
 " GRB256
 " colorscheme grb256
 
@@ -217,3 +221,41 @@ nmap <Leader>= gg=G
 
 " Toggle listchars
 nmap <leader>l :set list!<CR>
+
+" Plugins
+
+let g:unite_win_height = 10
+let g:unite_split_rule = 'botright'
+let g:unite_source_history_yank_enable = 2
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <Leader>f :<C-u>Unite -default-action=vsplit file_rec/async:!<CR>
+nnoremap <Leader>ff :<C-u>Unite file<CR>
+nnoremap <Leader>fb :<C-u>Unite buffer<CR>
+nnoremap <Leader>ft :<C-u>Unite tag<CR>
+nnoremap <Leader>fo :<C-u>Unite outline<CR>
+nnoremap <Leader>a :<C-u>Unite grep:.<CR>
+nnoremap <Leader>yr :<C-u>Unite history/yank<CR>
+
+let g:SuperTabDefaultCompletionType        = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+
+let g:rooter_manual_only = 2
+
+nmap <Leader>a" :Tabularize /"<CR>
+vmap <Leader>a" :Tabularize /"<CR>
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
+let g:signify_vcs_list = ['git', 'svn']
+
+map <leader>t :TagbarToggle<CR>
+map <leader>ts :TagbarOpen<CR>\|:TagbarShowTag<CR>
+let g:tagbar_autoshowtag = 2
+
+let g:syntastic_check_on_open = 2
+
+:imap <C-y> <Plug>snipMateNextOrTrigger
+:smap <C-y> <Plug>snipMateNextOrTrigger

@@ -1,4 +1,4 @@
-if has("win32")
+if has("win33")
 	set guifont=Consolas:h13
 else
 	if has("unix")
