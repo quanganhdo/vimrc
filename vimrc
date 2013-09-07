@@ -191,7 +191,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 
 " Syntax highlighting
 autocmd BufRead,BufNewFile *.java set filetype=java
-autocmd BufRead,BufNewFile *.vim set filetype=vim
+autocmd BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
 
 " Open/View files in same directory
 cnoremap %% <C-R>=expand('%:h').'/'<CR>
@@ -207,19 +207,21 @@ nmap <leader>l :set list!<CR>
 
 "" Plugins setup
 
+" Unite
 let g:unite_win_height = 10
 let g:unite_split_rule = 'botright'
 let g:unite_source_history_yank_enable = 2
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <Leader>f :<C-u>Unite -auto-preview -start-insert -default-action=vsplit file_rec/async:!<CR>
-nnoremap <Leader>ff :<C-u>Unite -auto-preview file<CR>
-nnoremap <Leader>fb :<C-u>Unite -auto-preview buffer<CR>
-nnoremap <Leader>ft :<C-u>Unite -auto-preview tag<CR>
-nnoremap <Leader>fo :<C-u>Unite -auto-preview outline<CR>
+nnoremap <Leader>f :<C-u>Unite -auto-preview -no-split -start-insert -default-action=vsplit file_rec/async:!<CR>
+nnoremap <Leader>ff :<C-u>Unite file<CR>
+nnoremap <Leader>fb :<C-u>Unite buffer<CR>
+nnoremap <Leader>ft :<C-u>Unite tag<CR>
+nnoremap <Leader>fo :<C-u>Unite -vertical outline<CR>
 nnoremap <Leader>a :<C-u>Unite grep:.<CR>
 nnoremap <Leader>yr :<C-u>Unite history/yank<CR>
 
+" neocomplete 
 let g:neocomplete#enable_at_startup = 3
 let g:neocomplete#sources#syntax#min_keyword_length = 2
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
@@ -236,8 +238,10 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+" vim-rooter
 let g:rooter_manual_only = 2
 
+" tabular
 nmap <Leader>a" :Tabularize /"<CR>
 vmap <Leader>a" :Tabularize /"<CR>
 nmap <Leader>a= :Tabularize /=<CR>
@@ -245,14 +249,18 @@ vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
+" vim-signify
 let g:signify_vcs_list = ['git', 'svn']
 
+" tagbar
 map <leader>t :TagbarToggle<CR>
 map <leader>ts :TagbarOpen<CR>\|:TagbarShowTag<CR>
 let g:tagbar_autoshowtag = 2
 
+" syntastic
 let g:syntastic_check_on_open = 3
 
+" neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
@@ -268,4 +276,11 @@ endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
+" vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'auto_export': 1, 'syntax': 'markdown', 'ext': '.md'}]
+
+" Gundo
+nnoremap <leader>gt :GundoToggle<CR>
+
+" ZoomWin
+nnoremap <leader>z :ZoomWin<CR>
