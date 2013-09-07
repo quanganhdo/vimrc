@@ -191,6 +191,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 
 " Syntax highlighting
 autocmd BufRead,BufNewFile *.java set filetype=java
+autocmd BufRead,BufNewFile *.vim set filetype=vim
 
 " Open/View files in same directory
 cnoremap %% <C-R>=expand('%:h').'/'<CR>
@@ -201,12 +202,10 @@ vnoremap > >gv
 vnoremap < <gv
 nmap <Leader>= gg=G
 
-"" Plugin setup
-
 " Toggle listchars
 nmap <leader>l :set list!<CR>
 
-" Plugins
+"" Plugins setup
 
 let g:unite_win_height = 10
 let g:unite_split_rule = 'botright'
