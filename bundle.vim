@@ -56,6 +56,7 @@ NeoBundle 'tpope/vim-repeat'
 
 " Unix shell commands
 NeoBundle 'tpope/vim-eunuch'     
+NeoBundle 'sjl/clam.vim'
 
 " Readline key bindings
 NeoBundle 'tpope/vim-rsi'        
@@ -77,7 +78,7 @@ NeoBundle 'ZoomWin'
 " Golden ratio
 NeoBundle 'roman/golden-ratio'
 
-" Tmux fixes
+" iTerm2/Tmux fixes
 NeoBundle 'sjl/vitality.vim'
 NeoBundle 'tpope/vim-tbone'
 

@@ -30,6 +30,9 @@ set ttymouse=xterm2
 " Use , as <leader>
 let mapleader = ","
 
+" Quit insert mode
+inoremap jk <esc>
+
 " Dot selection
 vnoremap . :norm.<cr>
 
@@ -44,6 +47,8 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+map <C-x> <C-w>x
+nnoremap <leader>w :bd<cr>
 set splitbelow
 set splitright         
 
@@ -135,10 +140,10 @@ if !exists("*ReloadVimrc")
 endif
 
 " Always open help in vertical split
-augroup helpfiles
+aug helpfiles
 	au!
 	au BufRead,BufEnter */doc/* wincmd L
-augroup END
+aug END
 
 " Open .vimrc for quick editing
 if !exists('*OpenInSplitIfNecessary')
@@ -150,60 +155,73 @@ if !exists('*OpenInSplitIfNecessary')
 		endif
 	endfunction
 endif
-autocmd! BufWritePost .vimrc :call ReloadVimrc()
-autocmd! BufWritePost .bundle.vim :call ReloadVimrc()
-nmap <Leader>v :call OpenInSplitIfNecessary($MYVIMRC)<CR>
-nmap <Leader>b :call OpenInSplitIfNecessary("~/.bundle.vim")<CR>
+aug vimrc
+	au!
+	au! BufWritePost .vimrc :call ReloadVimrc()
+	au! BufWritePost .bundle.vim :call ReloadVimrc()
+aug END
+nmap <leader>v :call OpenInSplitIfNecessary($MYVIMRC)<cr>
+nmap <leader>b :call OpenInSplitIfNecessary("~/.bundle.vim")<cr>
 
 " Reload file
-nmap <Leader>r :e<CR>
+nmap <leader>r :e<cr>
 
-"" AutoCmds
-au FocusLost * :wa              " save file on losing focus
+" Help
+nmap <leader>h :h 
 
-" Relative number for current window only
 if !exists("*TurnOffNumber")
 	function TurnOffNumber()
+		set norelativenumber
 		set number
-		set nonumber
 	endfunction
 endif
-au WinEnter * set relativenumber
-au WinLeave * :call TurnOffNumber()
+aug allfiles
+	au!
 
-" Jump to last cursor position 
-autocmd BufReadPost *
-			\ if line("'\"") > 0 && line("'\"") <= line("$") |
-			\   exe "normal g`\"" |
-			\ endif
+	" Save file on losing focus
+	au FocusLost * :wa        
 
-" Misc spacings
-autocmd Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
+	" Relative number for current window only
+	au WinEnter * set relativenumber
+	au WinLeave * :call TurnOffNumber()
 
-" Autocompletion
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
+	" Jump to last cursor position 
+	au BufReadPost *
+				\ if line("'\"") > 0 && line("'\"") <= line("$") |
+				\   exe "normal g`\"" |
+				\ endif
+aug END
 
-" Syntax highlighting
-autocmd BufRead,BufNewFile *.java set filetype=java
-autocmd BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
+aug filetypes
+	au!
+	" Misc spacings
+	au Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
+
+	" Autocompletion
+	au FileType python set omnifunc=pythoncomplete#Complete
+	au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+	au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
+	au FileType css set omnifunc=csscomplete#CompleteCSS
+	au FileType xml set omnifunc=xmlcomplete#CompleteTags
+	au FileType php set omnifunc=phpcomplete#CompletePHP
+	au FileType c set omnifunc=ccomplete#Complete
+
+	" Syntax highlighting
+	au BufRead,BufNewFile *.java set filetype=java
+	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
+aug END
 
 " Open/View files in same directory
-cnoremap %% <C-R>=expand('%:h').'/'<CR>
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 
 " Indent/Unident
 vnoremap > >gv
 vnoremap < <gv
-nmap <Leader>= gg=G
+nmap <leader>= gg=G
 
 " Toggle listchars
-nmap <leader>l :set list!<CR>
+nmap <leader>l :set list!<cr>
 
 "" Plugins setup
 
@@ -213,13 +231,13 @@ let g:unite_split_rule = 'botright'
 let g:unite_source_history_yank_enable = 2
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <Leader>f :<C-u>Unite -auto-preview -no-split -start-insert -default-action=vsplit file_rec/async:!<CR>
-nnoremap <Leader>ff :<C-u>Unite file<CR>
-nnoremap <Leader>fb :<C-u>Unite buffer<CR>
-nnoremap <Leader>ft :<C-u>Unite tag<CR>
-nnoremap <Leader>fo :<C-u>Unite -vertical outline<CR>
-nnoremap <Leader>a :<C-u>Unite grep:.<CR>
-nnoremap <Leader>yr :<C-u>Unite history/yank<CR>
+nnoremap <leader>f :<C-u>Unite -auto-preview -no-split -start-insert -default-action=vsplit file_rec/async:!<cr>
+nnoremap <leader>ff :<C-u>Unite file<cr>
+nnoremap <leader>fb :<C-u>Unite buffer<cr>
+nnoremap <leader>ft :<C-u>Unite tag<cr>
+nnoremap <leader>fo :<C-u>Unite -vertical outline<cr>
+nnoremap <leader>a :<C-u>Unite grep:.<cr>
+nnoremap <leader>yr :<C-u>Unite history/yank<cr>
 
 " neocomplete 
 let g:neocomplete#enable_at_startup = 3
@@ -229,9 +247,9 @@ if !exists('g:neocomplete#keyword_patterns')
 	let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+inoremap <silent> <cr> <C-r>=<SID>my_cr_function()<cr>
 function! s:my_cr_function()
-	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+	return pumvisible() ? neocomplete#close_popup() : "\<cr>"
 endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -242,19 +260,19 @@ endif
 let g:rooter_manual_only = 2
 
 " tabular
-nmap <Leader>a" :Tabularize /"<CR>
-vmap <Leader>a" :Tabularize /"<CR>
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <leader>a" :Tabularize /"<cr>
+vmap <leader>a" :Tabularize /"<cr>
+nmap <leader>a= :Tabularize /=<cr>
+vmap <leader>a= :Tabularize /=<cr>
+nmap <leader>a: :Tabularize /:\zs<cr>
+vmap <leader>a: :Tabularize /:\zs<cr>
 
 " vim-signify
 let g:signify_vcs_list = ['git', 'svn']
 
 " tagbar
-map <leader>t :TagbarToggle<CR>
-map <leader>ts :TagbarOpen<CR>\|:TagbarShowTag<CR>
+map <leader>t :TagbarToggle<cr>
+map <leader>ts :TagbarOpen<cr>\|:TagbarShowTag<cr>
 let g:tagbar_autoshowtag = 2
 
 " syntastic
@@ -280,7 +298,7 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'auto_export': 1, 'syntax': 'markdown', 'ext': '.md'}]
 
 " Gundo
-nnoremap <leader>gt :GundoToggle<CR>
+nnoremap <leader>gt :GundoToggle<cr>
 
 " ZoomWin
-nnoremap <leader>z :ZoomWin<CR>
+nnoremap <leader>z :ZoomWin<cr>
