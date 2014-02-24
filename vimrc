@@ -192,24 +192,24 @@ aug allfiles
 				\ endif
 aug END
 
-aug filetypes
-	au!
-	" Misc spacings
-	au Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
+" aug filetypes
+" 	au!
+" 	" Misc spacings
+" 	au Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
 
-	" Autocompletion
-	au FileType python set omnifunc=pythoncomplete#Complete
-	au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-	au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-	au FileType css set omnifunc=csscomplete#CompleteCSS
-	au FileType xml set omnifunc=xmlcomplete#CompleteTags
-	au FileType php set omnifunc=phpcomplete#CompletePHP
-	au FileType c set omnifunc=ccomplete#Complete
+" 	" Autocompletion
+" 	au FileType python set omnifunc=pythoncomplete#Complete
+" 	au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+" 	au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
+" 	au FileType css set omnifunc=csscomplete#CompleteCSS
+" 	au FileType xml set omnifunc=xmlcomplete#CompleteTags
+" 	au FileType php set omnifunc=phpcomplete#CompletePHP
+" 	au FileType c set omnifunc=ccomplete#Complete
 
-	" Syntax highlighting
-	au BufRead,BufNewFile *.java set filetype=java
-	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
-aug END
+" 	" Syntax highlighting
+" 	au BufRead,BufNewFile *.java set filetype=java
+" 	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
+" aug END
 
 " Open/View files in same directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -299,6 +299,9 @@ let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'auto_export': 1, 'syntax':
 
 " Gundo
 nnoremap <leader>gt :GundoToggle<cr>
+
+" golden-ratio
+let g:golden_ratio_exclude_nonmodifiable = 1
 
 " ZoomWin
 nnoremap <leader>z :ZoomWin<cr>

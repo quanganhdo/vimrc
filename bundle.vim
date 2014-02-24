@@ -51,6 +51,9 @@ NeoBundle 'tpope/vim-endwise'
 " Git
 NeoBundle 'tpope/vim-fugitive'   
 
+" Browser
+NeoBundle 'tpope/vim-vinegar'
+
 " Dot commands for plugin maps
 NeoBundle 'tpope/vim-repeat'     
 
@@ -71,9 +74,13 @@ NeoBundle 'airblade/vim-rooter'
 NeoBundle 'matchit.zip'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
+NeoBundle 'gcmt/wildfire.vim'
 
 " Zoom in/out of buffer
 NeoBundle 'ZoomWin'
+
+" Seek
+NeoBundle 'goldfeld/vim-seek'
 
 " Golden ratio
 NeoBundle 'roman/golden-ratio'
@@ -91,8 +98,11 @@ NeoBundle 'mhinz/vim-signify'
 " Undo tree
 NeoBundle 'sjl/gundo.vim'
 
+" Languages
+NeoBundle 'sheerun/vim-polyglot'
+
 " Ruby/Rails stuff
-NeoBundle 'vim-ruby/vim-ruby'
+" NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-rake'
 NeoBundle 'tpope/vim-bundler'
@@ -103,10 +113,7 @@ NeoBundle 'majutsushi/tagbar'
 " Syntax checking
 NeoBundle 'scrooloose/syntastic'
 
-" WriteRoom inspired
-NeoBundle 'mikewest/vimroom'
-
-" Wiki
-NeoBundle 'vimwiki/vimwiki'
+" Ag
+NeoBundle 'rking/ag.vim'
 
 NeoBundleCheck
