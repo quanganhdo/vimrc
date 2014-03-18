@@ -27,6 +27,7 @@ NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
 
 " Alternate file
 NeoBundle 'a.vim'
@@ -48,11 +49,15 @@ NeoBundle 'tpope/vim-commentary'
 " End structures automatically
 NeoBundle 'tpope/vim-endwise'    
 
+" Handy mappings
+NeoBundle 'tpope/vim-unimpaired'
+
 " Git
 NeoBundle 'tpope/vim-fugitive'   
 
-" Browser
-NeoBundle 'tpope/vim-vinegar'
+" File browser
+" NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/vimfiler.vim'
 
 " Dot commands for plugin maps
 NeoBundle 'tpope/vim-repeat'     
@@ -74,16 +79,12 @@ NeoBundle 'airblade/vim-rooter'
 NeoBundle 'matchit.zip'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'nelstrom/vim-textobj-rubyblock'
-NeoBundle 'gcmt/wildfire.vim'
 
 " Zoom in/out of buffer
 NeoBundle 'ZoomWin'
 
 " Seek
 NeoBundle 'goldfeld/vim-seek'
-
-" Golden ratio
-NeoBundle 'roman/golden-ratio'
 
 " iTerm2/Tmux fixes
 NeoBundle 'sjl/vitality.vim'
@@ -96,10 +97,10 @@ NeoBundle 'godlygeek/tabular'
 NeoBundle 'mhinz/vim-signify'
 
 " Undo tree
-NeoBundle 'sjl/gundo.vim'
+NeoBundle 'mbbill/undotree'
 
-" Languages
-NeoBundle 'sheerun/vim-polyglot'
+" Syntax checking
+NeoBundle 'scrooloose/syntastic'
 
 " Ruby/Rails stuff
 " NeoBundle 'vim-ruby/vim-ruby'
@@ -110,10 +111,10 @@ NeoBundle 'tpope/vim-bundler'
 " C stuff
 NeoBundle 'majutsushi/tagbar'
 
-" Syntax checking
-NeoBundle 'scrooloose/syntastic'
+" HTML stuff
+NeoBundle 'rstacruz/sparkup', {'rtp': 'vim'}
 
-" Ag
-NeoBundle 'rking/ag.vim'
+" Golden ratio
+NeoBundle 'zhaocai/GoldenView.Vim'
 
 NeoBundleCheck

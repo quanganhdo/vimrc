@@ -27,13 +27,17 @@ set ttyfast
 set mouse=nvi               " enable mouse usage in normal, visual, and insert mode
 set ttymouse=xterm2
 
+" Use space as :
+nnoremap <space> :
+
+" Use ! as :!
+nnoremap ! :!
+
 " Use , as <leader>
 let mapleader = ","
 
-" Quit insert mode
-inoremap jk <esc>
-
 " Dot selection
+" Works with range
 vnoremap . :norm.<cr>
 
 " Switch between last 2 files
@@ -42,13 +46,20 @@ nnoremap <leader><leader> <c-^>
 " Remove highlighting
 nnoremap <leader><space> :noh<cr>
 
+" Faster drawing
+set lazyredraw
+
 " Move between windows quickly
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <C-x> <C-w>x
+
+" Close window
 nnoremap <leader>w :bd<cr>
+
+" Split more sensibly
 set splitbelow
 set splitright         
 
@@ -91,7 +102,8 @@ set statusline+=%F
 set statusline+=%{&modified?'*':''}
 set statusline+=]
 set statusline+=%{&readonly?'\ (read-only)\ ':'\ '}\ 
-set statusline+=%{strlen(&ft)?&ft:'<none>'}\ \ 
+set statusline+=%{strlen(&ft)?&ft:'none'}/
+set statusline+=%{strlen(&syntax)?&syntax:'none'}\ \ 
 set statusline+=%{&ff}/
 set statusline+=%{strlen(&fenc)?&fenc:'none'}\ \ 
 set statusline+=%=
@@ -163,11 +175,30 @@ aug END
 nmap <leader>v :call OpenInSplitIfNecessary($MYVIMRC)<cr>
 nmap <leader>b :call OpenInSplitIfNecessary("~/.bundle.vim")<cr>
 
-" Reload file
-nmap <leader>r :e<cr>
-
-" Help
-nmap <leader>h :h 
+" Test
+" http://www.oinksoft.com/blog/view/6/
+let ft_stdout_mappings = {
+			\'applescript': 'osascript',
+			\'bash': 'bash',
+			\'bc': 'bc',
+			\'haskell': 'runghc',
+			\'javascript': 'node',
+			\'lisp': 'sbcl',
+			\'nodejs': 'node',
+			\'ocaml': 'ocaml',
+			\'perl': 'perl',
+			\'php': 'php',
+			\'python': 'python',
+			\'ruby': 'ruby',
+			\'scheme': 'scheme',
+			\'sh': 'sh',
+			\'sml': 'sml',
+			\'spice': 'ngspice'
+			\}
+for ft_name in keys(ft_stdout_mappings)
+	execute 'autocmd Filetype ' . ft_name . ' nnoremap <buffer> <C-P> :write !'
+			\. ft_stdout_mappings[ft_name] . '<CR>'
+endfor
 
 if !exists("*TurnOffNumber")
 	function TurnOffNumber()
@@ -192,24 +223,26 @@ aug allfiles
 				\ endif
 aug END
 
-" aug filetypes
-" 	au!
-" 	" Misc spacings
-" 	au Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
+aug filetypes
+	au!
+	" Misc spacings
+	au Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
 
-" 	" Autocompletion
-" 	au FileType python set omnifunc=pythoncomplete#Complete
-" 	au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-" 	au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-" 	au FileType css set omnifunc=csscomplete#CompleteCSS
-" 	au FileType xml set omnifunc=xmlcomplete#CompleteTags
-" 	au FileType php set omnifunc=phpcomplete#CompletePHP
-" 	au FileType c set omnifunc=ccomplete#Complete
+	" Autocompletion
+	au FileType python set omnifunc=pythoncomplete#Complete
+	au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+	au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
+	au FileType css set omnifunc=csscomplete#CompleteCSS
+	au FileType xml set omnifunc=xmlcomplete#CompleteTags
+	au FileType php set omnifunc=phpcomplete#CompletePHP
+	au FileType c set omnifunc=ccomplete#Complete
 
-" 	" Syntax highlighting
-" 	au BufRead,BufNewFile *.java set filetype=java
-" 	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
-" aug END
+	" Syntax highlighting
+	au BufRead,BufNewFile *.java set filetype=java
+	au BufRead,BufNewFile *.php set filetype=php
+	au BufRead,BufNewFile *.rb set filetype=ruby
+	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
+aug END
 
 " Open/View files in same directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -220,24 +253,28 @@ vnoremap > >gv
 vnoremap < <gv
 nmap <leader>= gg=G
 
-" Toggle listchars
-nmap <leader>l :set list!<cr>
-
 "" Plugins setup
 
 " Unite
 let g:unite_win_height = 10
 let g:unite_split_rule = 'botright'
 let g:unite_source_history_yank_enable = 2
+let g:unite_enable_start_insert = 1
+if executable('ag')
+	let g:unite_source_grep_command = 'ag'
+	let g:unite_source_grep_default_opts =
+	\ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
+	\  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+	let g:unite_source_grep_recursive_opt = ''
+endif
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>f :<C-u>Unite -auto-preview -no-split -start-insert -default-action=vsplit file_rec/async:!<cr>
-nnoremap <leader>ff :<C-u>Unite file<cr>
-nnoremap <leader>fb :<C-u>Unite buffer<cr>
-nnoremap <leader>ft :<C-u>Unite tag<cr>
-nnoremap <leader>fo :<C-u>Unite -vertical outline<cr>
-nnoremap <leader>a :<C-u>Unite grep:.<cr>
-nnoremap <leader>yr :<C-u>Unite history/yank<cr>
+call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files'])
+nnoremap yf :<C-u>Unite -no-split -default-action=vsplit file_rec/async:!<cr>
+nnoremap yb :<C-u>Unite buffer<cr>
+nnoremap yt :<C-u>Unite tag<cr>
+nnoremap yo :<C-u>Unite outline<cr>
+nnoremap yg :<C-u>Unite grep:.<cr>
+nnoremap yk :<C-u>Unite history/yank<cr>
 
 " neocomplete 
 let g:neocomplete#enable_at_startup = 3
@@ -253,7 +290,7 @@ function! s:my_cr_function()
 endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
+	let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
 " vim-rooter
@@ -283,25 +320,26 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
+			\ "\<Plug>(neosnippet_expand_or_jump)"
+			\: pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
+			\ "\<Plug>(neosnippet_expand_or_jump)"
+			\: "\<TAB>"
 if has('conceal')
-  set conceallevel=2 concealcursor=i
+	set conceallevel=2 concealcursor=i
 endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
-" vimwiki
-let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'auto_export': 1, 'syntax': 'markdown', 'ext': '.md'}]
-
-" Gundo
-nnoremap <leader>gt :GundoToggle<cr>
-
-" golden-ratio
-let g:golden_ratio_exclude_nonmodifiable = 1
+" undotree
+nnoremap <leader>u :UndotreeToggle<cr>
 
 " ZoomWin
 nnoremap <leader>z :ZoomWin<cr>
+
+" Vimfiler
+map <C-n> :VimFilerExplorer<CR>
+nmap - :VimFiler -find<CR>
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_ignore_pattern = '^\%(.git\|.svn\|.DS_Store\)$'
+let g:vimfiler_safe_mode_by_default = 0
