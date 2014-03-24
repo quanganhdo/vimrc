@@ -242,6 +242,7 @@ aug filetypes
 	au FileType c set omnifunc=ccomplete#Complete
 
 	" Syntax highlighting
+	au BufRead,BufNewFile *.hs set filetype=haskell
 	au BufRead,BufNewFile *.java set filetype=java
 	au BufRead,BufNewFile *.php set filetype=php
 	au BufRead,BufNewFile *.rb set filetype=ruby
