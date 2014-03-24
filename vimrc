@@ -179,28 +179,30 @@ nmap <leader>b :call OpenInSplitIfNecessary("~/.bundle.vim")<cr>
 
 " Test
 " http://www.oinksoft.com/blog/view/6/
-let ft_stdout_mappings = {
-			\'applescript': 'osascript',
-			\'bash': 'bash',
-			\'bc': 'bc',
-			\'haskell': 'runghc',
-			\'javascript': 'node',
-			\'lisp': 'sbcl',
-			\'nodejs': 'node',
-			\'ocaml': 'ocaml',
-			\'perl': 'perl',
-			\'php': 'php',
-			\'python': 'python',
-			\'ruby': 'ruby',
-			\'scheme': 'scheme',
-			\'sh': 'sh',
-			\'sml': 'sml',
-			\'spice': 'ngspice'
-			\}
-for ft_name in keys(ft_stdout_mappings)
-	execute 'autocmd Filetype ' . ft_name . ' nnoremap <buffer> <C-P> :write !'
-			\. ft_stdout_mappings[ft_name] . '<CR>'
-endfor
+aug test
+	let ft_stdout_mappings = {
+				\'applescript': 'osascript',
+				\'bash': 'bash',
+				\'bc': 'bc',
+				\'haskell': 'runghc',
+				\'javascript': 'node',
+				\'lisp': 'sbcl',
+				\'nodejs': 'node',
+				\'ocaml': 'ocaml',
+				\'perl': 'perl',
+				\'php': 'php',
+				\'python': 'python',
+				\'ruby': 'ruby',
+				\'scheme': 'scheme',
+				\'sh': 'sh',
+				\'sml': 'sml',
+				\'spice': 'ngspice'
+				\}
+	for ft_name in keys(ft_stdout_mappings)
+		execute 'au Filetype ' . ft_name . ' nnoremap <buffer> <C-P> :write !'
+				\. ft_stdout_mappings[ft_name] . '<CR>'
+	endfor
+aug END
 
 if !exists("*TurnOffNumber")
 	function TurnOffNumber()
