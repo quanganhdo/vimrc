@@ -29,9 +29,11 @@ set ttymouse=xterm2
 
 " Use space as :
 nnoremap <space> :
+vnoremap <space> :
 
 " Use ! as :!
 nnoremap ! :!
+vnoremap ! :!
 
 " Use , as <leader>
 let mapleader = ","
