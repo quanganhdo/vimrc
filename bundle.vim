@@ -114,7 +114,4 @@ NeoBundle 'majutsushi/tagbar'
 " HTML stuff
 NeoBundle 'rstacruz/sparkup', {'rtp': 'vim'}
 
-" Golden ratio
-NeoBundle 'zhaocai/GoldenView.Vim'
-
 NeoBundleCheck
