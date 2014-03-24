@@ -33,7 +33,6 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'a.vim'
 
 " Theme
-NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'quanganhdo/grb256'
 NeoBundle 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
 
@@ -83,9 +82,6 @@ NeoBundle 'nelstrom/vim-textobj-rubyblock'
 " Zoom in/out of buffer
 NeoBundle 'ZoomWin'
 
-" Seek
-NeoBundle 'goldfeld/vim-seek'
-
 " iTerm2/Tmux fixes
 NeoBundle 'sjl/vitality.vim'
 NeoBundle 'tpope/vim-tbone'
@@ -102,11 +98,8 @@ NeoBundle 'mbbill/undotree'
 " Syntax checking
 NeoBundle 'scrooloose/syntastic'
 
-" Ruby/Rails stuff
-" NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-rake'
-NeoBundle 'tpope/vim-bundler'
+" Ruby stuff
+NeoBundle 'vim-ruby/vim-ruby'
 
 " C stuff
 NeoBundle 'majutsushi/tagbar'
