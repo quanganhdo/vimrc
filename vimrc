@@ -97,23 +97,39 @@ highlight SignifySignChange cterm=bold ctermbg=none ctermfg=227
 " set background=dark
 
 "" Statusline
-set statusline=[%n]\ 
-set statusline+=%{&paste?'*paste*\ ':''}
-set statusline+=[
-set statusline+=%F
-set statusline+=%{&modified?'*':''}
-set statusline+=]
-set statusline+=%{&readonly?'\ (read-only)\ ':'\ '}\ 
-set statusline+=%{strlen(&ft)?&ft:'none'}/
-set statusline+=%{strlen(&syntax)?&syntax:'none'}\ \ 
-set statusline+=%{&ff}/
-set statusline+=%{strlen(&fenc)?&fenc:'none'}\ \ 
-set statusline+=%=
-set statusline+=%{tagbar#currenttag('[%s]','')}\ \ 
-set statusline+=%{fugitive#statusline()}\ \ 
-set statusline+=\ %l,%c
-set statusline+=/%L\ 
-set statusline+=[%p%%]
+if !exists("*SetFullStatusLine")
+	function SetFullStatusLine()
+		setl statusline=[%n]\ 
+		setl statusline+=%{&paste?'*paste*\ ':''}
+		setl statusline+=[
+		setl statusline+=%F
+		setl statusline+=%{&modified?'*':''}
+		setl statusline+=]
+		setl statusline+=%{&readonly?'\ (read-only)\ ':'\ '}\ 
+		setl statusline+=%{strlen(&ft)?&ft:'none'}/
+		setl statusline+=%{strlen(&syntax)?&syntax:'none'}\ \ 
+		setl statusline+=%{&ff}/
+		setl statusline+=%{strlen(&fenc)?&fenc:'none'}\ \ 
+		setl statusline+=%=
+		setl statusline+=%{tagbar#currenttag('[%s]','')}\ \ 
+		setl statusline+=%{fugitive#statusline()}\ \ 
+		setl statusline+=\ %l,%c
+		setl statusline+=/%L\ 
+		setl statusline+=[%p%%]
+	endfunction
+
+	function SetShortStatusLine()
+		setl statusline=[%n]\ 
+		setl statusline+=[
+		setl statusline+=%F
+		setl statusline+=%{&modified?'*':''}
+		setl statusline+=]
+		setl statusline+=%=
+		setl statusline+=%l
+		setl statusline+=/%L\ 
+		setl statusline+=[%p%%]
+	endfunction
+endif
 
 "" Whitespace
 set tabstop=4                  " indentation every 4 cols
@@ -210,6 +226,7 @@ if !exists("*TurnOffNumber")
 		set number
 	endfunction
 endif
+
 aug allfiles
 	au!
 
@@ -217,8 +234,12 @@ aug allfiles
 	au FocusLost * :wa        
 
 	" Relative number for current window only
-	au WinEnter * set relativenumber
-	au WinLeave * :call TurnOffNumber()
+	au WinEnter,BufEnter * set relativenumber
+	au WinLeave,BufLeave * :call TurnOffNumber()
+
+	" Different statuslines
+	au WinEnter,BufEnter * :call SetFullStatusLine()
+	au WinLeave,BufLeave * :call SetShortStatusLine()
 
 	" Jump to last cursor position 
 	au BufReadPost *
