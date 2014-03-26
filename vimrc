@@ -144,8 +144,6 @@ set scrolloff=8                " around the cursor
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
-"" Statusline
-
 "" Searching
 set hlsearch                    " highlight matches
 set ignorecase                  " searches are case insensitive...
@@ -173,6 +171,9 @@ if !exists("*ReloadVimrc")
 		call cursor(l, c)
 	endfunction
 endif
+
+" Scrollbind
+noremap <silent> <leader>sb :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
 " Always open help in vertical split
 aug helpfiles
