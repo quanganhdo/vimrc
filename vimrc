@@ -51,15 +51,13 @@ nnoremap <leader><space> :noh<cr>
 " Faster drawing
 set lazyredraw
 
-" Move between windows quickly
+" Window handling
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <C-x> <C-w>x
-
-" Close window
-nnoremap <leader>w :bd<cr>
+map <leader>w <C-w>q
 
 " Split more sensibly
 set splitbelow
