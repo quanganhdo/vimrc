@@ -226,13 +226,6 @@ aug test
 	endfor
 aug END
 
-if !exists("*TurnOffNumber")
-	function TurnOffNumber()
-		set norelativenumber
-		set number
-	endfunction
-endif
-
 aug allfiles
 	au!
 
@@ -241,7 +234,7 @@ aug allfiles
 
 	" Relative number for current window only
 	au WinEnter,BufEnter * set relativenumber
-	au WinLeave,BufLeave * :call TurnOffNumber()
+	au WinLeave,BufLeave * set norelativenumber
 
 	" Different statuslines
 	au WinEnter,BufEnter * :call SetFullStatusLine()
