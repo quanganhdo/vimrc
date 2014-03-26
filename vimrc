@@ -74,6 +74,7 @@ set pastetoggle=<F2>
 
 "" Wrapping
 set wrap
+set linebreak
 
 "" Scheme
 set t_Co=256
