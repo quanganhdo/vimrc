@@ -182,8 +182,8 @@ aug helpfiles
 aug END
 
 " Open .vimrc for quick editing
-if !exists('*OpenInSplitIfNecessary')
-	function OpenInSplitIfNecessary(file)
+if !exists('*SplitIfNecessary')
+	function SplitIfNecessary(file)
 		if line('$') == 1 && getline(1) == ''
 			exec 'e' a:file
 		else
@@ -196,8 +196,8 @@ aug vimrc
 	au! BufWritePost .vimrc :call ReloadVimrc()
 	au! BufWritePost .bundle.vim :call ReloadVimrc()
 aug END
-nmap <leader>v :call OpenInSplitIfNecessary($MYVIMRC)<cr>
-nmap <leader>b :call OpenInSplitIfNecessary("~/.bundle.vim")<cr>
+nmap <leader>v :call SplitIfNecessary($MYVIMRC)<cr>
+nmap <leader>b :call SplitIfNecessary("~/.bundle.vim")<cr>
 
 " Test
 " http://www.oinksoft.com/blog/view/6/
