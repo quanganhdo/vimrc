@@ -19,7 +19,6 @@ set autowriteall          " write file contents when moving to another file
 set timeoutlen=1200       " more time for macros
 set fillchars+=vert:\ ,fold:-
 set history=10000
-set relativenumber
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " Mouse
@@ -101,6 +100,14 @@ hi SignifySignChange cterm=bold ctermbg=none ctermfg=227
 " colorscheme solarized
 " hi clear SignColumn
 " set background=dark
+
+"" Line number
+if !exists("*SetLineNumber")
+	function SetLineNumber()
+		set relativenumber
+		set number
+	endfunction
+endif
 
 "" Statusline
 if !exists("*SetFullStatusLine")
@@ -234,7 +241,7 @@ aug allfiles
 	au FocusLost * :wa        
 
 	" Relative number for current window only
-	au WinEnter,BufEnter * set relativenumber
+	au WinEnter,BufEnter * :call SetLineNumber()
 	au WinLeave,BufLeave * set norelativenumber
 
 	" Different statuslines
