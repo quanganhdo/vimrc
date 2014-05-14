@@ -270,21 +270,32 @@ aug filetypes
 	au FileType c set omnifunc=ccomplete#Complete
 
 	" Syntax highlighting
+	au BufRead,BufNewFile *.blade.php set filetype=blade
 	au BufRead,BufNewFile *.hs set filetype=haskell
 	au BufRead,BufNewFile *.java set filetype=java
+	au BufRead,BufNewFile *.js set filetype=javascript
 	au BufRead,BufNewFile *.php set filetype=php
+	au BufRead,BufNewFile *.html,.htm set filetype=html
 	au BufRead,BufNewFile *.rb set filetype=ruby
 	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
+
+	" Weirdness
+	au BufRead,BufNewFile *.blade.php set fileformat=unix
 aug END
 
 " Open/View files in same directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
+map <leader>e :<C-u>edit %%
 
 " Indent/Unident
 vnoremap > >gv
 vnoremap < <gv
+nmap <leader>V ggVG
 nmap <leader>= gg=G
+
+" j/k
+nmap j gj
+nmap k gk
 
 "" Plugins setup
 
