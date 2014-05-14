@@ -311,12 +311,23 @@ if executable('ag')
 	\  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
 	let g:unite_source_grep_recursive_opt = ''
 endif
-
+call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
+call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', join([
+    \ '\.git\/', 
+    \ '\.svn\/', 
+    \ '\.vagrant\/',
+    \ 'tmp\/',
+    \ 'app\/storage\/',
+	\ 'bower_components\/',
+	\ ], 
+    \ '\|'))
 call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files'])
-nnoremap yf :<C-u>Unite -no-split -default-action=vsplit file_rec/async:!<cr>
-nnoremap yb :<C-u>Unite buffer<cr>
-nnoremap yt :<C-u>Unite tag<cr>
-nnoremap yo :<C-u>Unite outline<cr>
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+nnoremap yf :<C-u>Unite -no-split file_rec/async:!<cr>
+nnoremap yb :<C-u>Unite -no-split buffer<cr>
+nnoremap ya :<C-u>Unite -no-split tag<cr>
+nnoremap yt :<C-u>Unite -no-split outline<cr>
 nnoremap yg :<C-u>Unite grep:.<cr>
 nnoremap yk :<C-u>Unite history/yank<cr>
 
