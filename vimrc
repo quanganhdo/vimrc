@@ -189,6 +189,9 @@ aug helpfiles
 	au BufRead,BufEnter */doc/* wincmd L
 aug END
 
+" Quickly open a split
+nnoremap yv :vs<CR>
+
 " Open .vimrc for quick editing
 if !exists('*SplitIfNecessary')
 	function SplitIfNecessary(file)
