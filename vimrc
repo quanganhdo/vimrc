@@ -296,9 +296,8 @@ vnoremap < <gv
 nmap <leader>V ggVG
 nmap <leader>= gg=G
 
-" j/k
-nmap j gj
-nmap k gk
+nnoremap j gj
+nnoremap k gk
 
 "" Plugins setup
 
