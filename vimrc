@@ -321,6 +321,9 @@ call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', join([
     \ 'tmp\/',
     \ 'app\/storage\/',
 	\ 'bower_components\/',
+	\ 'fonts\/',
+	\ 'sass-cache\/',
+	\ 'node_modules\/',
 	\ ], 
     \ '\|'))
 call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files'])
@@ -371,6 +374,10 @@ let g:tagbar_autoshowtag = 2
 
 " syntastic
 let g:syntastic_check_on_open = 3
+let g:syntastic_ignore_files = [
+  \ '\c\.js$',
+  \ '\c\.hbs$',
+  \]
 
 " neosnippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
