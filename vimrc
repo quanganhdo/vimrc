@@ -26,6 +26,9 @@ set ttyfast
 set mouse=nvi               " enable mouse usage in normal, visual, and insert mode
 set ttymouse=xterm2
 
+" C-a, C-x don't deal with hex
+set nrformats=
+
 " Use space as :
 nnoremap <space> :
 vnoremap <space> :
@@ -55,7 +58,6 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-map <C-x> <C-w>x
 map <leader>w <C-w>q
 
 " Split more sensibly
