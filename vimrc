@@ -321,18 +321,14 @@ if executable('ag')
 endif
 call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
 call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', join([
-    \ '\.git\/', 
-    \ '\.svn\/', 
-    \ '\.vagrant\/',
+    \ '\.\(git\|svn\|vagrant\)\/', 
     \ 'tmp\/',
     \ 'app\/storage\/',
 	\ 'bower_components\/',
 	\ 'fonts\/',
 	\ 'sass-cache\/',
 	\ 'node_modules\/',
-	\ '\.jpe?g$',
-	\ '\.gif$',
-	\ '\.png$',
+	\ '\.\(jpe?g\|gif\|png\)$',
 	\ ], 
     \ '\|'))
 call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files', 'matcher_project_files'])
