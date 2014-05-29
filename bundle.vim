@@ -56,7 +56,6 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-fugitive'   
 
 " File browser
-" NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/vimfiler.vim'
 
 " Dot commands for plugin maps
@@ -88,7 +87,7 @@ NeoBundle 'sjl/vitality.vim'
 NeoBundle 'tpope/vim-tbone'
 
 " Indent code
-NeoBundle 'godlygeek/tabular'
+NeoBundle 'junegunn/vim-easy-align'
 
 " SVN/Git changes on signs bar
 NeoBundle 'mhinz/vim-signify'

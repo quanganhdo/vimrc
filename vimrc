@@ -357,16 +357,14 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 	let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+" vim-easy-align
+vmap <enter> <Plug>(EasyAlign)
+nmap <leader>a <Plug>(EasyAlign)
+vmap <leader><enter>   <Plug>(LiveEasyAlign)
+nmap <leader><leader>a <Plug>(LiveEasyAlign)
+
 " vim-rooter
 let g:rooter_manual_only = 2
-
-" tabular
-nmap <leader>a" :Tabularize /"<cr>
-vmap <leader>a" :Tabularize /"<cr>
-nmap <leader>a= :Tabularize /=<cr>
-vmap <leader>a= :Tabularize /=<cr>
-nmap <leader>a: :Tabularize /:\zs<cr>
-vmap <leader>a: :Tabularize /:\zs<cr>
 
 " vim-signify
 let g:signify_vcs_list = ['git', 'svn']
