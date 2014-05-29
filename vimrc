@@ -328,6 +328,9 @@ call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', join([
 	\ 'fonts\/',
 	\ 'sass-cache\/',
 	\ 'node_modules\/',
+	\ '\.jpe?g$',
+	\ '\.gif$',
+	\ '\.png$',
 	\ ], 
     \ '\|'))
 call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files'])
