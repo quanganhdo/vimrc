@@ -83,15 +83,19 @@ map <c-t> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+" base16
+colorscheme base16-ocean
+set background=dark
+
 " Tomorrow-Night 
-colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night
 
 hi Search cterm=underline ctermfg=none ctermbg=none
 
-hi clear SignColumn
-hi SignifySignAdd cterm=bold ctermbg=none ctermfg=119
-hi SignifySignDelete cterm=bold ctermbg=none ctermfg=167
-hi SignifySignChange cterm=bold ctermbg=none ctermfg=227
+" hi clear SignColumn
+" hi SignifySignAdd cterm=bold ctermbg=none ctermfg=119
+" hi SignifySignDelete cterm=bold ctermbg=none ctermfg=167
+" hi SignifySignChange cterm=bold ctermbg=none ctermfg=227
 
 " GRB256
 " colorscheme grb256
