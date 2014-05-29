@@ -16,6 +16,7 @@ NeoBundle 'Shougo/vimproc', {
       \    },
       \ }
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'tsukkee/unite-tag'
 NeoBundle 'h1mesuke/unite-outline'
 

@@ -335,13 +335,14 @@ call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', join([
 	\ '\.png$',
 	\ ], 
     \ '\|'))
-call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files'])
-call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files', 'matcher_project_files'])
+call unite#filters#sorter_default#use(['sorter_selecta'])
 
 nnoremap yf :<C-u>Unite -no-split file_rec/async:!<cr>
 nnoremap yb :<C-u>Unite -no-split buffer<cr>
 nnoremap ya :<C-u>Unite -no-split tag<cr>
 nnoremap yt :<C-u>Unite -no-split outline<cr>
+nnoremap ym :<C-u>Unite -no-split file_mru<cr>
 nnoremap yg :<C-u>Unite grep:.<cr>
 nnoremap yk :<C-u>Unite history/yank<cr>
 
