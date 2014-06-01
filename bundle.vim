@@ -115,5 +115,6 @@ NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 " Utilities
 NeoBundle 'listmaps.vim'
+NeoBundle 'editorconfig/editorconfig-vim'
 
 NeoBundleCheck
