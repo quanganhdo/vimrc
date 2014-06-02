@@ -302,9 +302,6 @@ vnoremap < <gv
 nmap <leader>V ggVG
 nmap <leader>= gg=G
 
-nnoremap j gj
-nnoremap k gk
-
 "" Plugins setup
 
 " Unite

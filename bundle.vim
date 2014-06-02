@@ -110,10 +110,8 @@ NeoBundle 'rstacruz/sparkup', {'rtp': 'vim'}
 NeoBundle 'xsbeats/vim-blade'
 NeoBundle 'mustache/vim-mustache-handlebars'
 
-" LaTeX stuff
-NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
-
 " Utilities
 NeoBundle 'listmaps.vim'
+NeoBundle 'editorconfig/editorconfig-vim'
 
 NeoBundleCheck
