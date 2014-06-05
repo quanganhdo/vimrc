@@ -89,23 +89,7 @@ map <c-t> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 colorscheme base16-ocean
 set background=dark
 
-" Tomorrow-Night 
-" colorscheme Tomorrow-Night
-
 hi Search cterm=underline ctermfg=none ctermbg=none
-
-" hi clear SignColumn
-" hi SignifySignAdd cterm=bold ctermbg=none ctermfg=119
-" hi SignifySignDelete cterm=bold ctermbg=none ctermfg=167
-" hi SignifySignChange cterm=bold ctermbg=none ctermfg=227
-
-" GRB256
-" colorscheme grb256
-
-" Solarized 
-" colorscheme solarized
-" hi clear SignColumn
-" set background=dark
 
 "" Line number
 if !exists("*SetLineNumber")
@@ -282,11 +266,6 @@ aug filetypes
 	au BufRead,BufNewFile *.html,.htm set filetype=html
 	au BufRead,BufNewFile *.rb set filetype=ruby
 	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
-
-	" Extended support
-	au FileType html NeoBundleSource vim-mustache-handlebars
-	au FileType ruby NeoBundleSource vim-ruby
-	au FileType blade NeoBundleSource vim-blade
 
 	" Autocompletion
 	au FileType python set omnifunc=pythoncomplete#Complete
