@@ -103,6 +103,7 @@ NeoBundle 'airblade/vim-rooter'
 
 " Text objects
 NeoBundle 'matchit.zip'
+NeoBundle 'welle/targets.vim'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'nelstrom/vim-textobj-rubyblock', {
 			\ 'lazy': 1,
