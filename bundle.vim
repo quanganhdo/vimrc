@@ -39,30 +39,14 @@ NeoBundle 'h1mesuke/unite-outline', {
 			\ }}
 
 " Neocomplete (if_lua support)
-NeoBundle 'Shougo/neocomplete.vim', {
-			\ 'lazy': 1,
-			\ 'autoload': {
-			\	'insert': '1',
-			\ }}
+NeoBundle 'Shougo/neocomplete.vim' 
 
 " Snippets
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'Shougo/neosnippet.vim', {
-			\ 'lazy': 1,
-			\ 'autoload': {
-			\	'insert': 1,
-			\ }}
-NeoBundle 'Shougo/neosnippet-snippets', {
-			\ 'lazy': 1,
-			\ 'autoload': {
-			\	'on_source': 'neosnippet',
-			\ }}
-NeoBundle 'honza/vim-snippets', {
-			\ 'lazy': 1,
-			\ 'autoload': {
-			\	'function_prefix': 'vim_snippets',
-			\ }}
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'honza/vim-snippets'
 
 " Theme
 NeoBundle 'chriskempson/base16-vim'
@@ -178,6 +162,7 @@ NeoBundle 'jelera/vim-javascript-syntax', {
 			\ }}
 
 " Utilities
+NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'listmaps.vim', {
 			\ 'lazy': 1,
 			\ }

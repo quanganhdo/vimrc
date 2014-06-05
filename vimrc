@@ -292,6 +292,9 @@ nmap <leader>= gg=G
 
 "" Plugins setup
 
+" Dash
+nmap <silent> <leader>- <Plug>DashGlobalSearch
+
 " Unite
 let g:unite_win_height = 10
 let g:unite_split_rule = 'botright'
