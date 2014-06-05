@@ -257,6 +257,10 @@ aug allfiles
 	au WinEnter,BufEnter * :call SetFullStatusLine()
 	au WinLeave,BufLeave * :call SetShortStatusLine()
 
+	" Cursorline
+	au WinEnter,BufEnter * setlocal cursorline
+	au WinLeave,BufLeave * setlocal nocursorline
+
 	" Jump to last cursor position 
 	au BufReadPost *
 				\ if line("'\"") > 0 && line("'\"") <= line("$") |
