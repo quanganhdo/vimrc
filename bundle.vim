@@ -100,16 +100,17 @@ NeoBundle 'mbbill/undotree'
 " Syntax checking
 NeoBundle 'scrooloose/syntastic'
 
-" Ruby stuff
-NeoBundle 'vim-ruby/vim-ruby'
-
 " C stuff
 NeoBundle 'majutsushi/tagbar'
 
+" Ruby stuff
+NeoBundleLazy 'vim-ruby/vim-ruby'
+
 " HTML stuff
 NeoBundle 'rstacruz/sparkup', {'rtp': 'vim'}
-NeoBundle 'xsbeats/vim-blade'
-NeoBundle 'mustache/vim-mustache-handlebars'
+NeoBundleLazy 'xsbeats/vim-blade'
+NeoBundleLazy 'mustache/vim-mustache-handlebars'
+NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 
 " Utilities
 NeoBundle 'listmaps.vim'

@@ -273,15 +273,6 @@ aug filetypes
 	" Misc spacings
 	au Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
 
-	" Autocompletion
-	au FileType python set omnifunc=pythoncomplete#Complete
-	au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-	au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-	au FileType css set omnifunc=csscomplete#CompleteCSS
-	au FileType xml set omnifunc=xmlcomplete#CompleteTags
-	au FileType php set omnifunc=phpcomplete#CompletePHP
-	au FileType c set omnifunc=ccomplete#Complete
-
 	" Syntax highlighting
 	au BufRead,BufNewFile *.blade.php set filetype=blade
 	au BufRead,BufNewFile *.hs set filetype=haskell
@@ -291,6 +282,20 @@ aug filetypes
 	au BufRead,BufNewFile *.html,.htm set filetype=html
 	au BufRead,BufNewFile *.rb set filetype=ruby
 	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
+
+	" Extended support
+	au FileType html NeoBundleSource vim-mustache-handlebars
+	au FileType ruby NeoBundleSource vim-ruby
+	au FileType blade NeoBundleSource vim-blade
+
+	" Autocompletion
+	au FileType python set omnifunc=pythoncomplete#Complete
+	au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+	au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
+	au FileType css set omnifunc=csscomplete#CompleteCSS
+	au FileType xml set omnifunc=xmlcomplete#CompleteTags
+	au FileType php set omnifunc=phpcomplete#CompletePHP
+	au FileType c set omnifunc=ccomplete#Complete
 
 	" Weirdness
 	au BufRead,BufNewFile *.blade.php set fileformat=unix
