@@ -338,6 +338,7 @@ nnoremap yt :<C-u>Unite -no-split outline<cr>
 nnoremap ym :<C-u>Unite -no-split file_mru<cr>
 nnoremap yg :<C-u>Unite grep:.<cr>
 nnoremap yk :<C-u>Unite history/yank<cr>
+nnoremap yh :<C-u>Unite help<cr>
 
 " neocomplete 
 let g:neocomplete#enable_at_startup = 3
