@@ -78,7 +78,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler.vim', {
 			\ 'lazy': 1,
 			\ 'autoload': {
-			\	'commands': 'VimFilter',
+			\	'commands': 'VimFiler',
 			\ }}
 
 " Dot commands for plugin maps
