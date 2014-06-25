@@ -346,6 +346,11 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 	let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+" CamelCaseMotion
+map <S-W> <Plug>CamelCaseMotion_w
+map <S-B> <Plug>CamelCaseMotion_b
+map <S-E> <Plug>CamelCaseMotion_e
+
 " vim-easy-align
 vmap <enter> <Plug>(EasyAlign)
 nmap <leader>a <Plug>(EasyAlign)

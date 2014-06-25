@@ -105,6 +105,8 @@ NeoBundle 'airblade/vim-rooter'
 NeoBundle 'matchit.zip'
 NeoBundle 'wellle/targets.vim'
 NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'bkad/CamelCaseMotion'
+NeoBundle 'vim-scripts/argtextobj.vim'
 NeoBundle 'nelstrom/vim-textobj-rubyblock', {
 			\ 'lazy': 1,
 			\ 'autoload': {
