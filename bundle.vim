@@ -78,7 +78,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler.vim', {
 			\ 'lazy': 1,
 			\ 'autoload': {
-			\	'commands': 'VimFilter',
+			\	'commands': ['VimFiler', 'VimFilerExplorer']
 			\ }}
 
 " Dot commands for plugin maps
@@ -145,7 +145,7 @@ NeoBundle 'vim-ruby/vim-ruby', {
 			\ }}
 
 " HTML stuff
-NeoBundle 'rstacruz/sparkup', {'rtp': 'vim'}
+NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 NeoBundle 'xsbeats/vim-blade', {
 			\ 'lazy': 1,
 			\ 'autoload': {

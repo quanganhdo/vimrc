@@ -256,6 +256,7 @@ aug filetypes
 	au!
 	" Misc spacings
 	au Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
+    au Filetype php set ai ts=4 sts=4 sw=4 et
 
 	" Syntax highlighting
 	au BufRead,BufNewFile *.blade.php set filetype=blade
@@ -292,12 +293,9 @@ nmap <leader>= gg=G
 
 "" Plugins setup
 
-" Dash
-nmap <silent> <leader>- <Plug>DashGlobalSearch
-
 " Unite
 let g:unite_win_height = 10
-let g:unite_split_rule = 'botright'
+let g:unite_split_rule = 'topleft'
 let g:unite_source_history_yank_enable = 2
 let g:unite_enable_start_insert = 1
 if executable('ag')
