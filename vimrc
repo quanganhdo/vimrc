@@ -180,7 +180,7 @@ aug helpfiles
 aug END
 
 " Quickly open a split
-nnoremap yv :vs<CR>
+nnoremap yv :vnew<CR>
 
 " Open .vimrc for quick editing
 if !exists('*SplitIfNecessary')

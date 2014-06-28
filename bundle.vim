@@ -145,6 +145,7 @@ NeoBundle 'vim-ruby/vim-ruby', {
 			\ 'autoload': {
 			\	'filetypes': 'ruby',
 			\ }}
+NeoBundle 'malkomalko/projections.vim'
 
 " HTML stuff
 NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
