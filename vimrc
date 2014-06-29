@@ -60,6 +60,17 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <leader>w <C-w>q
 
+nnoremap <left> <C-w><
+nnoremap <right> <C-w>>
+nnoremap <up> <C-w>-
+nnoremap <down> <C-w>+
+
+" Move thru visual lines
+nnoremap j gj
+nnoremap k gk
+xnoremap j gj
+xnoremap k gk
+
 " Split more sensibly
 set splitbelow
 set splitright         
