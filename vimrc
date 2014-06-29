@@ -306,7 +306,7 @@ nmap <leader>= gg=G
 
 " Unite
 let g:unite_win_height = 10
-let g:unite_split_rule = 'topright'
+let g:unite_split_rule = 'botright'
 let g:unite_source_history_yank_enable = 2
 let g:unite_enable_start_insert = 1
 if executable('ag')
@@ -331,14 +331,14 @@ call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', join([
 call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files', 'matcher_project_files'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
 
-nnoremap yf :<C-u>Unite -no-split file_rec/async:!<cr>
-nnoremap yb :<C-u>Unite -no-split buffer<cr>
-nnoremap ya :<C-u>Unite -no-split tag<cr>
-nnoremap yt :<C-u>Unite -no-split outline<cr>
-nnoremap ym :<C-u>Unite -no-split file_mru<cr>
-nnoremap yg :<C-u>Unite grep:.<cr>
-nnoremap yk :<C-u>Unite history/yank<cr>
-nnoremap yh :<C-u>Unite help<cr>
+nnoremap yf :<C-u>Unite -prompt-direction=top -no-split file_rec/async:!<cr>
+nnoremap yb :<C-u>Unite -prompt-direction=top -no-split buffer_tab<cr>
+nnoremap ya :<C-u>Unite -prompt-direction=top -no-split tag<cr>
+nnoremap yt :<C-u>Unite -prompt-direction=top -no-split outline<cr>
+nnoremap ym :<C-u>Unite -prompt-direction=top -no-split file_mru<cr>
+nnoremap yg :<C-u>Unite -prompt-direction=top grep:.<cr>
+nnoremap yk :<C-u>Unite -prompt-direction=top history/yank<cr>
+nnoremap yh :<C-u>Unite -prompt-direction=top help<cr>
 
 " neocomplete 
 let g:neocomplete#enable_at_startup = 3
@@ -409,8 +409,14 @@ nnoremap <leader>u :UndotreeToggle<cr>
 nnoremap <leader>z :ZoomWin<cr>
 
 " Vimfiler
-map <C-n> :VimFilerExplorer<CR>
+map <C-n> :VimFilerExplorer -find<CR>
 nmap - :VimFiler -find<CR>
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_ignore_pattern = '^\%(.git\|.svn\|.DS_Store\)$'
 let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
+
