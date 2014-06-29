@@ -331,7 +331,7 @@ call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', join([
 call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files', 'matcher_project_files'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
 
-nnoremap yf :<C-u>Unite -prompt-direction=top -no-split file_rec/async:!<cr>
+nnoremap yf :<C-u>Unite -prompt-direction=top -no-split -immediately file_rec/async:!<cr>
 nnoremap yb :<C-u>Unite -prompt-direction=top -no-split buffer_tab<cr>
 nnoremap ya :<C-u>Unite -prompt-direction=top -no-split tag<cr>
 nnoremap yt :<C-u>Unite -prompt-direction=top -no-split outline<cr>
@@ -358,9 +358,9 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 
 " CamelCaseMotion
-map <S-W> <Plug>CamelCaseMotion_w
-map <S-B> <Plug>CamelCaseMotion_b
-map <S-E> <Plug>CamelCaseMotion_e
+map ;w <Plug>CamelCaseMotion_w
+map ;b <Plug>CamelCaseMotion_b
+map ;e <Plug>CamelCaseMotion_e
 
 " vim-easy-align
 vmap <enter> <Plug>(EasyAlign)
@@ -419,4 +419,3 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
-
