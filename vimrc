@@ -344,15 +344,20 @@ call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', join([
     \ '\|'))
 call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files', 'matcher_project_files'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
+call unite#custom#profile('default', 'context', {
+	\ 'here': 1,
+	\ 'prompt_direction': 'top'
+	\ })
 
-nnoremap yf :<C-u>Unite -prompt-direction=top -no-split -immediately file_rec/async:!<cr>
-nnoremap yb :<C-u>Unite -prompt-direction=top -no-split buffer_tab<cr>
-nnoremap ya :<C-u>Unite -prompt-direction=top -no-split tag<cr>
-nnoremap yt :<C-u>Unite -prompt-direction=top -no-split outline<cr>
-nnoremap ym :<C-u>Unite -prompt-direction=top -no-split file_mru<cr>
-nnoremap yg :<C-u>Unite -prompt-direction=top grep:.<cr>
-nnoremap yk :<C-u>Unite -prompt-direction=top history/yank<cr>
-nnoremap yh :<C-u>Unite -prompt-direction=top help<cr>
+nnoremap yf :<C-u>Unite -immediately file_rec/async:!<cr>
+nnoremap yl :<C-u>Unite -immediately file_rec/git:--cache:--others:--exclude-standard<cr>
+nnoremap yb :<C-u>Unite buffer_tab<cr>
+nnoremap ya :<C-u>Unite tag<cr>
+nnoremap yt :<C-u>Unite outline<cr>
+nnoremap ym :<C-u>Unite file_mru<cr>
+nnoremap yg :<C-u>Unite grep:.<cr>
+nnoremap yk :<C-u>Unite history/yank<cr>
+nnoremap yh :<C-u>Unite help<cr>
 
 " neocomplete 
 let g:neocomplete#enable_at_startup = 3
