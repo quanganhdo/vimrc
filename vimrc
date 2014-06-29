@@ -81,7 +81,6 @@ set cursorline                  " highlight current line
 set cmdheight=2                 " command line height
 
 "" Copy
-map <leader>y "*y
 set pastetoggle=<F2>
 
 "" Wrapping
@@ -288,7 +287,7 @@ aug filetypes
 	au FileType php set omnifunc=phpcomplete#CompletePHP
 	au FileType c set omnifunc=ccomplete#Complete
 
-	" Weirdness
+	" Weirdo
 	au BufRead,BufNewFile *.blade.php set fileformat=unix
 aug END
 
