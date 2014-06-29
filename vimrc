@@ -123,10 +123,10 @@ nnoremap / /\v
 vnoremap / /\v
 
 " Scrollbind
-noremap <silent> <leader>sb :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
+noremap <silent> <leader>sb :<C-u>let @z=&so<cr>:set so=0 noscb<cr>:bo vs<cr>Ljzt:setl scb<cr><C-w>p:setl scb<cr>:let &so=@z<cr>
 
 " Quickly open a split
-nnoremap yv :vnew<CR>
+nnoremap yv :vnew<cr>
 
 " Open/View files in same directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -141,7 +141,7 @@ nmap <leader>= msHmtgg=G'tzt`s
 " For debugging 
 map <c-t> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 
 " }}}
 
@@ -256,7 +256,7 @@ aug test
 				\}
 	for ft_name in keys(ft_stdout_mappings)
 		execute 'au Filetype ' . ft_name . ' nnoremap <buffer> <C-P> :write !'
-				\. ft_stdout_mappings[ft_name] . '<CR>'
+				\. ft_stdout_mappings[ft_name] . '<cr>'
 	endfor
 aug END
 
@@ -423,8 +423,8 @@ nnoremap <leader>u :UndotreeToggle<cr>
 nnoremap <leader>z :ZoomWin<cr>
 
 " Vimfiler
-map <C-n> :VimFilerExplorer -find<CR>
-nmap - :VimFiler -find<CR>
+map <C-n> :VimFilerExplorer -find<cr>
+nmap - :VimFiler -find<cr>
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_ignore_pattern = '^\%(.git\|.svn\|.DS_Store\)$'
 let g:vimfiler_safe_mode_by_default = 0
