@@ -20,6 +20,7 @@ set timeoutlen=1200       " more time for macros
 set fillchars+=vert:\ ,fold:-
 set history=10000
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set shiftround
 
 " Mouse
 set ttyfast
@@ -265,8 +266,8 @@ aug END
 aug filetypes
 	au!
 	" Misc spacings
-	au Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2 et
-    au Filetype php set ai ts=4 sts=4 sw=4 et
+	au Filetype ruby,haml,yaml,html,javascript set ai ts=2 sts=2 sw=2
+    au Filetype php set ai ts=4 sts=4 sw=4
 
 	" Syntax highlighting
 	au BufRead,BufNewFile *.blade.php set filetype=blade
