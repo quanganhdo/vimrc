@@ -1,4 +1,7 @@
-"" Behaviors
+" vim:fdm=marker
+
+" Behaviors {{{
+
 set nocompatible                " choose no compatibility with legacy vi
 filetype off
 
@@ -30,6 +33,52 @@ set ttymouse=xterm2
 " C-a, C-x don't deal with hex
 set nrformats=
 
+" Faster drawing
+set lazyredraw
+
+" Split more sensibly
+set splitbelow
+set splitright         
+
+"" Display
+set showmode                    " display current mode
+set cursorline                  " highlight current line
+set cmdheight=2                 " command line height
+
+"" Copy
+set pastetoggle=<F2>
+
+"" Wrapping
+set wrap
+set linebreak
+
+" Backup files
+set noswapfile
+
+"" Whitespace
+set tabstop=4                  " indentation every 4 cols
+set shiftwidth=4               " indent of 4 spaces
+set softtabstop=4              " backspaces delete indentation
+set scrolloff=8                " around the cursor
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+"" Searching
+set hlsearch                    " highlight matches
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter          
+
+"" Undo
+set undodir=$HOME/.vim/tmp
+set backupdir=$HOME/.vim/tmp
+set undofile
+set undolevels=1000         " number of undos 
+set undoreload=10000        " number of lines to save for undo  
+
+" }}}
+
+" Mappings {{{
+
 " Use space as :
 nnoremap <space> :
 vnoremap <space> :
@@ -51,9 +100,6 @@ nnoremap <leader><leader> <c-^>
 " Remove highlighting
 nnoremap <leader><space> :noh<cr>
 
-" Faster drawing
-set lazyredraw
-
 " Window handling
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -72,35 +118,44 @@ nnoremap k gk
 xnoremap j gj
 xnoremap k gk
 
-" Split more sensibly
-set splitbelow
-set splitright         
+" Use normal regex
+nnoremap / /\v
+vnoremap / /\v
 
-"" Display
-set showmode                    " display current mode
-set cursorline                  " highlight current line
-set cmdheight=2                 " command line height
+" Scrollbind
+noremap <silent> <leader>sb :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
-"" Copy
-set pastetoggle=<F2>
+" Quickly open a split
+nnoremap yv :vnew<CR>
 
-"" Wrapping
-set wrap
-set linebreak
+" Open/View files in same directory
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :<C-u>edit %%
 
-"" Scheme
-set t_Co=256
+" Indent/Unident
+vnoremap > >gv
+vnoremap < <gv
+nmap <leader>V ggVG
+nmap <leader>= msHmtgg=G'tzt`s
 
 " For debugging 
 map <c-t> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+" }}}
+
+" UI {{{
+
 " base16
 colorscheme base16-eighties
 set background=dark
 
 hi Search cterm=underline ctermfg=none ctermbg=none
+
+" }}}
+
+" Auto Commands {{{
 
 "" Line number
 if !exists("*SetLineNumber")
@@ -145,33 +200,6 @@ if !exists("*SetFullStatusLine")
 	endfunction
 endif
 
-"" Whitespace
-set tabstop=4                  " indentation every 4 cols
-set shiftwidth=4               " indent of 4 spaces
-set softtabstop=4              " backspaces delete indentation
-set scrolloff=8                " around the cursor
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
-
-"" Searching
-set hlsearch                    " highlight matches
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless they contain at least one capital letter          
-
-"" Undo
-set undodir=$HOME/.vim/tmp
-set backupdir=$HOME/.vim/tmp
-set undofile
-set undolevels=1000         " number of undos 
-set undoreload=10000        " number of lines to save for undo  
-
-" Use normal regex
-nnoremap / /\v
-vnoremap / /\v
-
-" Backup files
-set noswapfile
-
 if !exists("*ReloadVimrc")
 	function ReloadVimrc()
 		let l = line(".")
@@ -181,17 +209,11 @@ if !exists("*ReloadVimrc")
 	endfunction
 endif
 
-" Scrollbind
-noremap <silent> <leader>sb :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
-
 " Always open help in vertical split
 aug helpfiles
 	au!
 	au BufRead,BufEnter */doc/* wincmd L
 aug END
-
-" Quickly open a split
-nnoremap yv :vnew<CR>
 
 " Open .vimrc for quick editing
 if !exists('*SplitIfNecessary')
@@ -292,17 +314,9 @@ aug filetypes
 	au BufRead,BufNewFile *.blade.php set fileformat=unix
 aug END
 
-" Open/View files in same directory
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :<C-u>edit %%
+" }}}
 
-" Indent/Unident
-vnoremap > >gv
-vnoremap < <gv
-nmap <leader>V ggVG
-nmap <leader>= msHmtgg=G'tzt`s
-
-"" Plugins setup
+" Plugins {{{
 
 " Unite
 let g:unite_win_height = 10
@@ -419,3 +433,5 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
+
+" }}}
