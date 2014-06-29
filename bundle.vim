@@ -145,7 +145,6 @@ NeoBundle 'vim-ruby/vim-ruby', {
 			\ 'autoload': {
 			\	'filetypes': 'ruby',
 			\ }}
-NeoBundle 'malkomalko/projections.vim'
 
 " HTML stuff
 NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -166,7 +165,6 @@ NeoBundle 'jelera/vim-javascript-syntax', {
 			\ }}
 
 " Utilities
-NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'listmaps.vim', {
 			\ 'lazy': 1,
 			\ }
