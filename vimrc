@@ -300,7 +300,7 @@ map <leader>e :<C-u>edit %%
 vnoremap > >gv
 vnoremap < <gv
 nmap <leader>V ggVG
-nmap <leader>= gg=G
+nmap <leader>= msHmtgg=G'tzt`s
 
 "" Plugins setup
 
