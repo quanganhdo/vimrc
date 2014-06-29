@@ -86,11 +86,6 @@ NeoBundle 'tpope/vim-repeat'
 
 " Unix shell commands
 NeoBundle 'tpope/vim-eunuch'     
-NeoBundle 'sjl/clam.vim', {
-			\ 'lazy': 1,
-			\ 'autoload': {
-			\	'commands': ['Clam', 'ClamVisual'],
-			\ }}
 
 " Readline key bindings
 NeoBundle 'tpope/vim-rsi'        
@@ -141,6 +136,13 @@ NeoBundle 'majutsushi/tagbar'
 
 " Ruby stuff
 NeoBundle 'vim-ruby/vim-ruby', {
+			\ 'lazy': 1,
+			\ 'autoload': {
+			\	'filetypes': 'ruby',
+			\ }}
+
+" Rails stuff
+NeoBundle 'tpope/vim-rails', {
 			\ 'lazy': 1,
 			\ 'autoload': {
 			\	'filetypes': 'ruby',

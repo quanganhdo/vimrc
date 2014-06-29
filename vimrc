@@ -428,7 +428,7 @@ nnoremap <leader>u :UndotreeToggle<cr>
 nnoremap <leader>z :ZoomWin<cr>
 
 " Vimfiler
-map <C-n> :VimFilerExplorer -find<cr>
+map <C-n> :VimFilerExplorer<cr>
 nmap - :VimFiler -find<cr>
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_ignore_pattern = '^\%(.git\|.svn\|.DS_Store\)$'
