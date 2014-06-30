@@ -349,15 +349,15 @@ call unite#custom#profile('default', 'context', {
 	\ 'prompt_direction': 'top'
 	\ })
 
-nnoremap yf :<C-u>Unite -immediately file_rec/async:!<cr>
-nnoremap yl :<C-u>Unite -immediately file_rec/git:--cache:--others:--exclude-standard<cr>
-nnoremap yb :<C-u>Unite buffer_tab<cr>
-nnoremap ya :<C-u>Unite tag<cr>
-nnoremap yt :<C-u>Unite outline<cr>
-nnoremap ym :<C-u>Unite file_mru<cr>
-nnoremap yg :<C-u>Unite grep:.<cr>
-nnoremap yk :<C-u>Unite history/yank<cr>
-nnoremap yh :<C-u>Unite help<cr>
+nnoremap <silent> yf :<C-u>Unite -immediately file_rec/async:!<cr>
+nnoremap <silent> yl :<C-u>Unite -immediately file_rec/git:--cache:--others:--exclude-standard<cr>
+nnoremap <silent> yb :<C-u>Unite buffer_tab<cr>
+nnoremap <silent> ya :<C-u>Unite tag<cr>
+nnoremap <silent> yt :<C-u>Unite outline<cr>
+nnoremap <silent> ym :<C-u>Unite file_mru<cr>
+nnoremap <silent> yg :<C-u>Unite -buffer-name=grep -resume -multi-line grep:.<cr>
+nnoremap <silent> yk :<C-u>Unite history/yank<cr>
+nnoremap <silent> yh :<C-u>Unite help<cr>
 
 " neocomplete 
 let g:neocomplete#enable_at_startup = 3
