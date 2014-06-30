@@ -176,6 +176,12 @@ NeoBundle 'jelera/vim-javascript-syntax', {
 			\	'filetypes': 'javascript',
 			\ }}
 
+NeoBundle 'tpope/vim-markdown', {
+			\ 'lazy': 1,
+			\ 'autoload': {
+			\	'filetypes': 'markdown',
+			\ }}
+
 " }}}
 
 " Miscellaneous {{{

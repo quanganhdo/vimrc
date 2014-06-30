@@ -297,7 +297,8 @@ aug filetypes
 	au BufRead,BufNewFile *.java set filetype=java
 	au BufRead,BufNewFile *.js set filetype=javascript
 	au BufRead,BufNewFile *.php set filetype=php
-	au BufRead,BufNewFile *.html,.htm set filetype=html
+	au BufRead,BufNewFile *.html,*.htm set filetype=html
+	au BufRead,BufNewFile *.md,*.mdown,*.markdown set filetype=markdown
 	au BufRead,BufNewFile *.rb set filetype=ruby
 	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
 
