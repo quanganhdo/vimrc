@@ -48,7 +48,6 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'matchit.zip'
 NeoBundle 'wellle/targets.vim'
 NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'bkad/CamelCaseMotion'
 NeoBundle 'vim-scripts/argtextobj.vim'
 NeoBundle 'nelstrom/vim-textobj-rubyblock', {
 			\ 'lazy': 1,
@@ -152,11 +151,8 @@ NeoBundle 'vim-ruby/vim-ruby', {
 			\ }}
 
 " Rails stuff
-NeoBundle 'tpope/vim-rails', {
-			\ 'lazy': 1,
-			\ 'autoload': {
-			\	'filetypes': 'ruby',
-			\ }}
+" This relies on vim-surround
+NeoBundle 'tpope/vim-rails' 
 
 " HTML stuff
 NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}

@@ -5,6 +5,8 @@
 set nocompatible                " choose no compatibility with legacy vi
 filetype off
 
+set shell=/bin/bash
+
 " Neobundle
 if filereadable($HOME . "/.bundle.vim")
 	source $HOME/.bundle.vim
@@ -350,18 +352,19 @@ call unite#custom#profile('default', 'context', {
 	\ 'prompt_direction': 'top'
 	\ })
 
-nnoremap <silent> yf :<C-u>Unite -immediately file_rec/async:!<cr>
-nnoremap <silent> yl :<C-u>Unite -immediately file_rec/git:--cache:--others:--exclude-standard<cr>
+nnoremap <silent> yf :<C-u>Unite -immediately file_rec/git:--cache:--others:--exclude-standard<cr>
+nnoremap <silent> yF :<C-u>Unite -immediately file_rec/async:!<cr>
 nnoremap <silent> yb :<C-u>Unite buffer_tab<cr>
 nnoremap <silent> ya :<C-u>Unite tag<cr>
 nnoremap <silent> yt :<C-u>Unite outline<cr>
 nnoremap <silent> ym :<C-u>Unite file_mru<cr>
-nnoremap <silent> yg :<C-u>Unite -buffer-name=grep -resume -multi-line grep:.<cr>
+nnoremap <silent> yg :<C-u>Unite -multi-line grep:.<cr>
+nnoremap <silent> yG :<C-u>Unite -buffer-name=grep -resume -multi-line grep:.<cr>
 nnoremap <silent> yk :<C-u>Unite history/yank<cr>
 nnoremap <silent> yh :<C-u>Unite help<cr>
 
 " neocomplete 
-let g:neocomplete#enable_at_startup = 3
+let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 2
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 if !exists('g:neocomplete#keyword_patterns')
@@ -376,11 +379,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 if !exists('g:neocomplete#sources#omni#input_patterns')
 	let g:neocomplete#sources#omni#input_patterns = {}
 endif
-
-" CamelCaseMotion
-map ;w <Plug>CamelCaseMotion_w
-map ;b <Plug>CamelCaseMotion_b
-map ;e <Plug>CamelCaseMotion_e
 
 " vim-easy-align
 vmap <enter> <Plug>(EasyAlign)
@@ -404,6 +402,7 @@ let g:syntastic_check_on_open = 3
 let g:syntastic_ignore_files = [
   \ '\c\.js$',
   \ '\c\.hbs$',
+  \ '\c\.html$',
   \]
 
 " neosnippet
