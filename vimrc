@@ -15,6 +15,9 @@ endif
 " Sensible
 runtime! plugin/sensible.vim
 
+set fileencodings=ucs-bom,utf8,default,latin1
+set encoding=utf-8
+
 set wildmode=list:longest " complete files like a shell
 set clipboard+=unnamed    " use the pasteboard as the default register
 set hidden                " don't raise a warning when navigating away from a hidden buffer with unsaved changes
