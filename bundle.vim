@@ -7,7 +7,6 @@ endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 
 " }}}
 
@@ -200,5 +199,7 @@ NeoBundle 'listmaps.vim', {
 " Go {{{
 
 NeoBundleCheck
+
+call neobundle#end()
 
 " }}}
