@@ -189,6 +189,9 @@ NeoBundle 'tpope/vim-eunuch'
 NeoBundle 'sjl/vitality.vim'
 NeoBundle 'tpope/vim-tbone'
 
+" Batch rename
+NeoBundle 'qpkorr/vim-renamer'
+
 " List all mappings
 NeoBundle 'listmaps.vim', {
 			\ 'lazy': 1,
