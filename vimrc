@@ -29,6 +29,7 @@ set fillchars+=vert:\ ,fold:-
 set history=10000
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set shiftround
+set showcmd
 
 " Mouse
 set ttyfast
