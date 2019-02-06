@@ -298,7 +298,6 @@ aug filetypes
     au Filetype php set ai ts=4 sts=4 sw=4
 
 	" Syntax highlighting
-	au BufRead,BufNewFile *.blade.php set filetype=blade
 	au BufRead,BufNewFile *.hs set filetype=haskell
 	au BufRead,BufNewFile *.java set filetype=java
 	au BufRead,BufNewFile *.js set filetype=javascript

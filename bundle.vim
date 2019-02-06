@@ -156,11 +156,6 @@ NeoBundle 'tpope/vim-rails'
 
 " HTML stuff
 NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-NeoBundle 'xsbeats/vim-blade', {
-			\ 'lazy': 1,
-			\ 'autoload': {
-			\	'filetypes': 'blade',
-			\ }}
 NeoBundle 'mustache/vim-mustache-handlebars', {
 			\ 'lazy': 1,
 			\ 'autoload': {
