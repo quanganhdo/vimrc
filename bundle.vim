@@ -137,9 +137,6 @@ NeoBundle 'mbbill/undotree', {
 " Syntax checking
 NeoBundle 'scrooloose/syntastic'
 
-" Consistent coding style
-NeoBundle 'editorconfig/editorconfig-vim'
-
 " C stuff
 NeoBundle 'majutsushi/tagbar'
 
@@ -149,10 +146,6 @@ NeoBundle 'vim-ruby/vim-ruby', {
 			\ 'autoload': {
 			\	'filetypes': 'ruby',
 			\ }}
-
-" Rails stuff
-" This relies on vim-surround
-NeoBundle 'tpope/vim-rails' 
 
 " HTML stuff
 NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
