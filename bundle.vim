@@ -59,7 +59,7 @@ NeoBundle 'nelstrom/vim-textobj-rubyblock', {
 NeoBundle 'junegunn/vim-easy-align'
 
 " Theme
-NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'danielwe/base16-vim'
 
 " }}}
 
