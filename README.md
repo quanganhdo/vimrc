@@ -4,10 +4,10 @@
     git submodule init
     git submodule update
 
-Create symlinks to vim, vimrc, gvimrc, and vundle.vim
+Create symlinks to vim, vimrc, gvimrc, and bundle.vim
 
-    ln -nfs <path to bundle.vim> ~/.bundle.vim
-    ln -nfs <path to vimrc> ~/.vimrc
-    ln -nfs <path to gvimrc> ~/.gvimrc
-    ln -nfs <path to vim> ~/.vim
-
+    ln -nfs /path/to/vimrc ~/.vim
+    ln -nfs /path/to/bundle.vim ~/.bundle.vim
+    ln -nfs /path/to/vimrc/vimrc ~/.vimrc
+    ln -nfs /path/to/vimrc/gvimrc ~/.gvimrc
+    
