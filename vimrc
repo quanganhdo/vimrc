@@ -128,9 +128,6 @@ xnoremap k gk
 nnoremap / /\v
 vnoremap / /\v
 
-" Scrollbind
-noremap <silent> <leader>sb :<C-u>let @z=&so<cr>:set so=0 noscb<cr>:bo vs<cr>Ljzt:setl scb<cr><C-w>p:setl scb<cr>:let &so=@z<cr>
-
 " Quickly open a split
 nnoremap yv :vnew<cr>
 
@@ -143,11 +140,6 @@ vnoremap > >gv
 vnoremap < <gv
 nmap <leader>V ggVG
 nmap <leader>= msHmtgg=G'tzt`s
-
-" For debugging 
-map <c-t> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 
 " }}}
 
@@ -186,7 +178,6 @@ if !exists("*SetFullStatusLine")
 		setl statusline+=%{&ff}/
 		setl statusline+=%{strlen(&fenc)?&fenc:'none'}\ \ 
 		setl statusline+=%=
-		setl statusline+=%{tagbar#currenttag('[%s]','')}\ \ 
 		setl statusline+=%{fugitive#statusline()}\ \ 
 		setl statusline+=\ %l,%c
 		setl statusline+=/%L\ 
@@ -239,33 +230,6 @@ aug END
 nmap <leader>v :call SplitIfNecessary($MYVIMRC)<cr>
 nmap <leader>b :call SplitIfNecessary("~/.bundle.vim")<cr>
 
-" Test
-" http://www.oinksoft.com/blog/view/6/
-aug test
-	let ft_stdout_mappings = {
-				\'applescript': 'osascript',
-				\'bash': 'bash',
-				\'bc': 'bc',
-				\'haskell': 'runghc',
-				\'javascript': 'node',
-				\'lisp': 'sbcl',
-				\'nodejs': 'node',
-				\'ocaml': 'ocaml',
-				\'perl': 'perl',
-				\'php': 'php',
-				\'python': 'python',
-				\'ruby': 'ruby',
-				\'scheme': 'scheme',
-				\'sh': 'sh',
-				\'sml': 'sml',
-				\'spice': 'ngspice'
-				\}
-	for ft_name in keys(ft_stdout_mappings)
-		execute 'au Filetype ' . ft_name . ' nnoremap <buffer> <C-P> :write !'
-				\. ft_stdout_mappings[ft_name] . '<cr>'
-	endfor
-aug END
-
 aug allfiles
 	au!
 
@@ -306,141 +270,17 @@ aug filetypes
 	au BufRead,BufNewFile *.md,*.mdown,*.markdown set filetype=markdown
 	au BufRead,BufNewFile *.rb set filetype=ruby
 	au BufRead,BufNewFile *.vim,.vimrc,.gvimrc set filetype=vim
-
-	" Autocompletion
-	au FileType python set omnifunc=pythoncomplete#Complete
-	au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-	au FileType html,markdown set omnifunc=htmlcomplete#CompleteTags
-	au FileType css set omnifunc=csscomplete#CompleteCSS
-	au FileType xml set omnifunc=xmlcomplete#CompleteTags
-	au FileType php set omnifunc=phpcomplete#CompletePHP
-	au FileType c set omnifunc=ccomplete#Complete
-
-	" Weirdo
-	au BufRead,BufNewFile *.blade.php set fileformat=unix
 aug END
 
 " }}}
 
 " Plugins {{{
 
-" Unite
-let g:unite_win_height = 10
-let g:unite_split_rule = 'botright'
-let g:unite_source_history_yank_enable = 2
-let g:unite_enable_start_insert = 1
-if executable('ag')
-	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts =
-	\ '--line-numbers --nocolor --nogroup --hidden --ignore ' .
-	\  '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-	let g:unite_source_grep_recursive_opt = ''
-endif
-call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
-call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', join([
-    \ '\.\(git\|svn\|vagrant\)\/', 
-    \ 'tmp\/',
-    \ 'app\/storage\/',
-	\ 'bower_components\/',
-	\ 'fonts\/',
-	\ 'sass-cache\/',
-	\ 'node_modules\/',
-	\ '\.\(jpe?g\|gif\|png\)$',
-	\ ], 
-    \ '\|'))
-call unite#filters#matcher_default#use(['matcher_fuzzy', 'matcher_hide_hidden_files', 'matcher_project_files'])
-call unite#filters#sorter_default#use(['sorter_selecta'])
-call unite#custom#profile('default', 'context', {
-	\ 'here': 1,
-	\ 'prompt_direction': 'top'
-	\ })
-
-nnoremap <silent> yf :<C-u>Unite -immediately file_rec/git:--cache:--others:--exclude-standard<cr>
-nnoremap <silent> yF :<C-u>Unite -immediately file_rec/async:!<cr>
-nnoremap <silent> yb :<C-u>Unite buffer_tab<cr>
-nnoremap <silent> ya :<C-u>Unite tag<cr>
-nnoremap <silent> yt :<C-u>Unite outline<cr>
-nnoremap <silent> ym :<C-u>Unite file_mru<cr>
-nnoremap <silent> yg :<C-u>Unite -multi-line grep:.<cr>
-nnoremap <silent> yG :<C-u>Unite -buffer-name=grep -resume -multi-line grep:.<cr>
-nnoremap <silent> yk :<C-u>Unite history/yank<cr>
-nnoremap <silent> yh :<C-u>Unite help<cr>
-
-" neocomplete 
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-if !exists('g:neocomplete#keyword_patterns')
-	let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-inoremap <silent> <cr> <C-r>=<SID>my_cr_function()<cr>
-function! s:my_cr_function()
-	return pumvisible() ? neocomplete#close_popup() : "\<cr>"
-endfunction
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-if !exists('g:neocomplete#sources#omni#input_patterns')
-	let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-" vim-easy-align
-vmap <enter> <Plug>(EasyAlign)
-nmap <leader>a <Plug>(EasyAlign)
-vmap <leader><enter>   <Plug>(LiveEasyAlign)
-nmap <leader><leader>a <Plug>(LiveEasyAlign)
-
-" vim-rooter
-let g:rooter_manual_only = 2
-
 " vim-signify
 let g:signify_vcs_list = ['git', 'svn']
 
-" tagbar
-map <leader>t :TagbarToggle<cr>
-map <leader>ts :TagbarOpen<cr>\|:TagbarShowTag<cr>
-let g:tagbar_autoshowtag = 2
-
-" syntastic
-let g:syntastic_check_on_open = 3
-let g:syntastic_ignore_files = [
-  \ '\c\.js$',
-  \ '\c\.hbs$',
-  \ '\c\.html$',
-  \]
-
-" neosnippet
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-			\ "\<Plug>(neosnippet_expand_or_jump)"
-			\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-			\ "\<Plug>(neosnippet_expand_or_jump)"
-			\: "\<TAB>"
-if has('conceal')
-	set conceallevel=0
-endif
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-
-" undotree
-nnoremap <leader>u :UndotreeToggle<cr>
-
 " ZoomWin
 nnoremap <leader>z :ZoomWin<cr>
-
-" Vimfiler
-map <C-n> :VimFilerExplorer<cr>
-nmap - :VimFiler -find<cr>
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_ignore_pattern = '^\%(.git\|.svn\|.DS_Store\)$'
-let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
 
 " vimwiki
 let g:vimwiki_list = [{'path': '/Users/anh/Library/Mobile Documents/com~apple~CloudDocs/vimwiki', 'ext': '.markdown' }]
