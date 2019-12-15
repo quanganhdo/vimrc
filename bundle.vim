@@ -185,6 +185,9 @@ NeoBundle 'listmaps.vim', {
 			\ 'lazy': 1,
 			\ }
 
+" Wiki
+NeoBundle 'vimwiki/vimwiki'
+
 " }}}
 
 " Go {{{

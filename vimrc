@@ -442,4 +442,8 @@ let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
 
+" vimwiki
+let g:vimwiki_list = [{'path': '/Users/anh/Library/Mobile Documents/com~apple~CloudDocs/vimwiki', 'ext': '.markdown' }]
+nmap <Leader>wq <Plug>VimwikiVSplitLink
+
 " }}}
