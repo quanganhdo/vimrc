@@ -1,0 +1,38 @@
+set showmode
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set surround
+set shiftround
+
+nnoremap <space> :
+vnoremap <space> :
+
+nnoremap ! :!
+vnoremap ! :!
+
+let mapleader = ","
+
+vnoremap . :norm.<cr>
+
+nnoremap <leader><space> :noh<cr>
+
+nnoremap j gj
+nnoremap k gk
+xnoremap j gj
+xnoremap k gk
+
+nnoremap / /\v
+vnoremap / /\v
+
+vnoremap > >gv
+vnoremap < <gv
+nmap <leader>V ggVG
+nmap <leader>= msHmtgg=G'tzt`s
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <leader>w <C-w>q
