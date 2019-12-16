@@ -6,8 +6,9 @@
 
 Create symlinks to vim, vimrc, gvimrc, and bundle.vim
 
-    ln -nfs /path/to/vimrc ~/.vim
-    ln -nfs /path/to/bundle.vim ~/.bundle.vim
+    ln -nfs /path/to/vimrc ~/.vim    
     ln -nfs /path/to/vimrc/vimrc ~/.vimrc
     ln -nfs /path/to/vimrc/gvimrc ~/.gvimrc
+    ln -nfs /path/to/vimrc/ideavimrc ~/.ideavimrc
+    ln -nfs /path/to/bundle.vim ~/.bundle.vim
     
