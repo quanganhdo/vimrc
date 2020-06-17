@@ -59,7 +59,8 @@ set wrap
 set linebreak
 
 " Backup files
-set noswapfile
+set nobackup
+set nowritebackup
 
 "" Whitespace
 set tabstop=4                  " indentation every 4 cols
